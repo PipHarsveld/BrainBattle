@@ -20,7 +20,7 @@ app.use(express.static(path.resolve('public')));
 
 io.on('connection', (socket) => {
     console.log('a user connected');
-    io.emit('history', history)
+    socket.emit('history', history)
 
     socket.on('chat', (data) => {
         console.log(data);
