@@ -1,0 +1,182 @@
+/*************/
+/* FONTS */
+/*************/
+@import url("https://use.typekit.net/myy2iyg.css");
+
+/*************/
+/* CSS RESET */
+/*************/
+
+/*naar een idee van Jen Simmons*/
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+button:not([disabled]) {
+  cursor: pointer;
+}
+
+
+
+/*********************/
+/* CUSTOM PROPERTIES */
+/*********************/
+:root {
+  --background-black: #242424;
+  --frame-black: #5C5C5C;
+  --white: #fff;
+
+  --decoration-orange: #FBB95C;
+  --decoration-pink: #FFD1DC;
+  --decoration-purple: #C1B0E1;
+  --decoration-yellow: #FDFD96;
+  --decoration-green: #CBF3B7;
+}
+
+
+
+/**************/
+/*** BASICS ***/
+/**************/
+body {
+  background-color: var(--background-black);
+}
+h1{
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+
+
+/**************/
+/*** HEADER ***/
+/**************/
+header {
+  display: flex;
+  justify-content: center;
+}
+
+
+
+/*************/
+/*** MAIN ***/
+/*************/
+/* main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 20em;
+} */
+main section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+main section ul {
+  background-color: var(--frame-black);
+  height: 73dvh;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  width: 90vw;
+
+  border-radius: 1em;
+}
+
+/*Message field*/
+main section form {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+main section form fieldset {
+  padding: 0;
+  border: none;
+  margin: 0;
+  position: relative;
+}
+main section form input {
+  font-family: "omnes-georgian", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  width: 90vw;
+  border: 0;
+  border-radius: 1em;
+
+  height: 3em;
+  font-size: 1em;
+  padding-left: 1em;
+}
+main section form input:focus {
+  outline: 0.2em solid var(--decoration-purple);
+}
+main section form > input:first-of-type {
+  margin-bottom: 1em;
+}
+main section form button {
+  clip-path: polygon(0 0, 100% 50%, 0 100%, 26% 50%);
+  background-color: var(--background-black);
+  color: var(--background-black);
+  width: 2em;
+  position: absolute;
+  right: 1em;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/*Messages*/
+section ul {
+  list-style-type: none;
+  padding: 0;
+  padding: 1em;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  background: transparent;
+}
+
+section ul li{
+  font-family: "omnes-georgian", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  padding: 1em;
+  background-color: var(--decoration-purple);
+  width: fit-content;
+  border-radius: 1em;
+
+  box-shadow: 0.08em 0.06em 0.1em 0.1em rgb(65, 65, 65);
+  margin-bottom: 1em;
+}
+
+section p {
+  margin-top: 0;
+  font-family: "omnes-georgian", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  color: var(--white);
+}
+
+
+
+/***************/
+/*media queries*/
+/***************/
+
+@media (min-width: 60em) {
+  main section ul {
+    width: 50em;
+  }
+  main section form input {
+    width: 50em;
+  }
+
+}

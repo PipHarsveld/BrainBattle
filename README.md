@@ -1,135 +1,116 @@
-# Real-Time Web @cmda-minor-web 2022 - 2023
+![banner_speakeasy](https://user-images.githubusercontent.com/54938035/232477598-1d0c0726-5f66-4bbb-a7fa-2a31ae7d7f78.svg)
+
+# Chatroom App
+
+Voor het vak Realtime Web gaan we samen een basic Chatroom app maken. Deze app gaan we maken met Node.js, Express en Socket.io.
+
+(description of our project)
+
+
+
 
 ## Table of Contents
-- [Synopsis](#synopsis)
-- [Description](#description)
-- [Communication](#communication)
-- [Goals](#goals)
-- [Grading](#grading)
-- [Programme](#programme)
+* [Taakverdeling](#taakverdeling)
+* [Schetsen](#schetsen)
+* [Coding style](#coding-style)
+* [Installeren](#installeren)
+* [Gebruik van het project](#gebruik-van-het-project)
+* [Features](#features)
+* [License](#license)
 
-## Synopsis
-- Course: Real-Time Web
-- Course Coordinator: Justus Sturkenboom ([@ju5tu5](https://github.com/ju5tu5))
-- Minor Coordinator(s): Robert Spier ([@roberrrt-s](https://github.com/roberrrt-s)) & Vasilis van Gemert ([@vasilisvg](https://github.com/vasilisvg))
-- Lecturers: Shyanta Vleugel ([@shyanta](https://github.com/shyanta)) & Justus Sturkenboom ([@ju5tu5](https://github.com/ju5tu5))
-- Student Assistants: 
-- Credit: 3 ECTS credits
-- Academic year: 2022-2023
-- Programme: Communication and Multimedia Design (full time bachelor)
-- Language: Dutch instructions and English resources
 
-## Description
-During this course you will learn how to build a real-time application. You will learn techniques to setup an open connection between the client and the server. This will enable you to send data in real-time both ways, at the same time.
 
-## Communication
-- [Github](https://github.com/cmda-minor-web/real-time-web-2223)
-- [Microsoft Teams](https://teams.microsoft.com/l/channel/19%3a61df853840064eae8ae6fc2dc9fc4566%40thread.tacv2/09%2520Real%2520Time%2520Web?groupId=c8b97eb6-ad53-4531-ad66-5c3c6297951c&tenantId=0907bb1e-21fc-476f-8843-02d09ceb59a7)
-- [Brightspace](https://dlo.mijnhva.nl/d2l/home/456154)
+## Schetsen
 
-If you have questions:
-- [Look at the additional resources]()
-- [Use a search engine like startpage](https://www.startpage.com/)
-- [Ask questions on MS Teams](https://teams.microsoft.com/l/channel/19%3a61df853840064eae8ae6fc2dc9fc4566%40thread.tacv2/09%2520Real%2520Time%2520Web?groupId=c8b97eb6-ad53-4531-ad66-5c3c6297951c&tenantId=0907bb1e-21fc-476f-8843-02d09ceb59a7) (please help each other!)
-- [Contact a student-assisstant](#synopsis)
-- [Contact a lecturer](#synopsis)
 
-## Goals
-After finishing this program you can:
-- _deal with real-time complexity;_
-- _handle real-time client-server interaction;_
-- _handle real-time data management;_
-- _handle multi-user support._
+### Uiteindelijke ontwerp
 
-## Grading
-Your efforts will be graded using a single point rubric (see below). You will have to pass the criterion (centre column) to pass the course. During the test you will be consulted and will be given feedback on things we think deficient and things we think are an improvement on the criterion.
 
-| Deficiency | Criterion | Improvement |
-|:--|:--|:--|
-|  | *Project* Your app is working and published on Heroku. Your project is thoroughly documented in the `README.md` file in your repository. Included are a description of the data-lifecycle, real-time events and external data source used by your app. |  |
-|  | *Complexity* You’ve implemented enough real-time functionality for us to test your comprehension of the subject. A lot of functionality is self-written. You are able to manipulate online examples live. |  |
-|  | *Client-server interaction* By interacting with the app, a user can influence the data model of the server in real time by directly modifying data OR by influencing API requests between server and source. The student has set up the data manipulations. |  |
-|  | *Data management* The server maintains a data model and each client is continuously updated with the correct data. |  |
-|  | *Multi-user support* Multiple clients can connect to the server. Interaction works as expected and is not dependent on the number of clients. You can explain how your app approaches this. |  |
+## Coding style
+Om ervoor te zorgen dat onze code overzichtelijk en netjes is, hebben we een aantal regels opgesteld. Deze regels zijn:
 
-## Programme
+**Html**
 
-### Daily Schedule
-To keep things simple we use a daily schedule that will be used during normal course days (monday/tuesday). We make exceptions for fridays, on these days a different schedule will be given.
+- Schrijf semantische HTML en gebruik niet onnodige `<div>`'s
+- Schrijf comments waar nodig om de code te verduidelijken
+- Gebruik regelmatig formatters om de code op te schonen
 
-| Time | Who | Activity |
-|:--|:--|:--|
-| *~09:00* | *(Shyanta \|\| Justus)* | *Standup* |
-| 09:30 | Tribe *+(Shyanta \|\| Justus)* | Talk with crucial information (make sure you attend!) |
-| 11:00 | Tribe | Work on the (day)assignment |
-|  | Per table *+(Shyanta \|\| Justus)* | Standup |
-| 13:00 | Tribe *+(Student assistants)* | Continue work on the (day)assignment |
-| 16:00ish | Tribe | Wrapup |
+**CSS**
 
-### Week 1 - Getting a grip
-Goal: Build and deploy a simple but unique real-time app
+- Maak gebruik van CSS variabelen
+- Groepeer CSS met comments, alles van hetzelfde onderdeel bij elkaar
+- Gebruik relatieve eenheden voor afmetingen (Rem, em, %, etc.)
 
-#### Monday 17 April 
-**Talk subjects:** Hit the ground running... [(slides)](https://docs.google.com/presentation/d/1MLSch_uKNEDyfz7fo71jbJrprunxQwd9GtgTse8wWpo/edit?usp=sharing) Course objective and explanation of the assignment, examples from last year, explanation of real-time, (live coded) bare bone chat app and deployment on Heroku.\
-**Day assignment:** [(assignment)](./course/week-1.md#assignment-1-make-it-so) Make it so *(as a team)*: Implement (code/style/discuss/deploy) basic chat (or other realtime) functionality on your teampage!
+**Javascript**
 
-#### Tuesday 18 April
-**Talk subjects:** My first realtime web app! [(slides)](https://docs.google.com/presentation/d/18eftO3epzIXDjdwl3cn5Wq99fkQYCUnExUqq9P72A3k) Short recap, (local) data management, using (wire) flows for realtime web apps.\
-**Day assignment:** [(assignment)](./course/week-1.md#assignment-2-make-it-so) Make it so *(individually)*. i) Create (code/style/discuss/deploy) a chat app (or other realtime functionality) based on the examples and ii) add your own unique feature!
+- Gebruik camelCase voor variabelen
+- Gebruik const en let in plaats van var
+- Schrijf comments waar nodig om de code te verduidelijken
+- Gebruik arrow functions
 
-#### Friday 21 april
 
-Friday afternoon we will have a [peer review session](./course/peer-review.md). You will read, comment and fire issues on each others code. Doing this is really good for your programming insight and helps others refining/refactoring their code.
+## Installeren
+Om deze app te gebruiken, moet je deze repository clonen. Je kunt dit doen door het volgende commando in je terminal te typen:
 
-| Time | Who | Activity |
-|:--|:--|:--|
-| 9:30 | Tribe *+(Shyanta \|\| Justus)* | Peer review |
-| 11:00 | Tribe *+(Shyanta \|\| Justus)* | Afronding Peer review |
+```
+git clone 
+```
 
-### Week 2 - Sockets and data
-Goal: Store, manipulate and share data between server-client   
+Na het clonen van de repo, moet je de dependencies installeren. Dit kun je doen door het volgende commando in je terminal te typen:
 
-#### Monday 24 April
-**Talk subjects:** Data driven development?! [(slides)]() Feedback about last week, final assignment and conditions (rubric), explanation of data management, Long polling vs Websockets. \
-**Day assignment:** [(assignment)](./course/week-2.md#assignment-1-proof-of-concept) (Proof of) Concept *(individually)*. i) Create a (3 > 1) concept based on existing data from an API and ii) map this data using modelling techniques.
+```
+npm install
+```
 
-#### Tuesday 25 April
-**Talk subjects:** Above all else, show the data. [(slides)]() Securing real-time web apps, offline support, the publication/subscription model and (case study) Quek!\
-**Day assignment:** [(assignment)](./course/week-2.md#assignment-2-proof-of-concept) Proof of concept *(individually)*: i) Create (code/style/discuss/deploy) part of the core functionality for your concept and ii) show the  corresponding data lifecycle diagram.
+Zodra de dependencies zijn geïnstalleerd, kan je naar de projectmap gaan met dit commando:
 
-### Week 3 - Dealing with multiple users
-Goal: Handle data sharing and multi-user support 
+```
+cd chatroom
+```
 
-#### Monday 8 May
-**Talk subjects:** Roll your own... [(slides) ]() Data management, the functional programming trinity (map, filter and reduce). OAuth?!
-**Day assignment:** [(assignment)](./course/week-3.md#assignment-1-data-management)
+Vervolgens kun je de app starten met dit commando:
 
-#### Tuesday 9 May
-**Talk subjects:** Not ignoring the UI-Stack! [(slides)](). Usability, feedback, feedforward etc. in real-time web apps, (case study) postNL loader and FAQ.
-**Day assignment:** [(assignment)](./course/week-3.md#assignment-2-user-testing)
+```
+npm run start
+```
 
-#### Friday 12 May
-We will have a final [peer review session](./course/peer-review.md). You will read, comment and fire issues on each others code. Doing this helps others dotting the i’s on their project.
+Yes, je bent nu helemaal klaar! Ga naar `http://localhost:4200/` en geniet van SpeakEasy!
 
-| Time | Who | Activity |
-|:--|:--|:--|
-| 14.00 | Tribe *+(Shyanta \|\| Justus)* | Peer review |
-| 15.30 | Tribe *+(Shyanta \|\| Justus)* | Finalize your assignment |
-| 16.00 | Tribe *+(Shyanta \|\| Justus)* | (drinks?!) |
 
-<!-- Here are some hints for your projects Readme.md! -->
+
+## Features
+- [X] Kies een nickname
+- [X] Verstuur berichten
+- [X] Ontvang berichten van andere gebruikers
+- [X] Zie wanneer een een andere gebruiker aan het typen is
+
+
+
+## Maker
+Deze Chatroom app is gemaakt door:
+[Pip Harsveld](https://github.com/PipHarsveld)
+
+
+## License
+Copyright © 2023 
+
+Dit project is [MIT](https://github.com/Inevdhoven/chatroom/blob/main/LICENSE) licensed.
+
+
+
+<!-- Here are some hints for your project! -->
 
 <!-- Start out with a title and a description -->
 
-<!-- Add a nice image here at the end of the week, showing off your shiny frontend 📸 -->
-
 <!-- Add a link to your live demo in Github Pages 🌐-->
+
+<!-- ☝️ replace this description with a description of your own work -->
 
 <!-- replace the code in the /docs folder with your own, so you can showcase your work with GitHub Pages 🌍 -->
 
-<!-- Maybe a table of contents here? 📚 -->
+<!-- Add a nice image here at the end of the week, showing off your shiny frontend 📸 -->
 
-<!-- ☝️ replace this description with a description of your own work -->
+<!-- Maybe a table of contents here? 📚 -->
 
 <!-- How about a section that describes how to install this project? 🤓 -->
 
@@ -141,6 +122,4 @@ We will have a final [peer review session](./course/peer-review.md). You will re
 
 <!-- Maybe a checklist of done stuff and stuff still on your wishlist? ✅ -->
 
-<!-- We all stand on the shoulders of giants, please link all the sources you used in to create this project. -->
-
-<!-- How about a license here? When in doubt use MIT. 📜  -->
+<!-- How about a license here? 📜  -->
