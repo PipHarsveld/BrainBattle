@@ -1,11 +1,8 @@
-![banner_speakeasy](https://user-images.githubusercontent.com/54938035/232477598-1d0c0726-5f66-4bbb-a7fa-2a31ae7d7f78.svg)
+# Brain Battle
 
-# Chatroom App
+Voor het vak Realtime Web hebben we met een groepje een basic Chatroom app gemaakt, genaamd SpeakEas, die ik als basis ga gebruiken voor mijn individuele app.
 
-Voor het vak Realtime Web hebben we met een groepje een basic Chatroom app gemaakt, genaamd SpeakEasy. Deze app hebben we gemaakt met Node.js, Express en Socket.io.
-
-
-Voor het individuele deel ga ik een Trivia app maken, waarbij je met meerdere mensen tegelijkertijd een quiz kunt doen. De quizvragen en antwoorden komen uit [deze trivia API](https://the-trivia-api.com/). Deze API is te gebruiken zonder API key. Ik ben nog niet echt begonnen aan deze trivia app, dus de live link gaat naar de SpeakEasy app.
+Voor het individuele deel ga ik een Trivia app maken, waarbij je met meerdere mensen tegelijkertijd een quiz kunt doen. Ik ben nog niet echt begonnen aan deze trivia app, dus de live link gaat naar de SpeakEasy app.
 
 
 
@@ -25,6 +22,11 @@ Voor het individuele deel ga ik een Trivia app maken, waarbij je met meerdere me
 - [X] Zie wanneer een een andere gebruiker aan het typen is
 - [X] Zie de geschiedenis van de gestuurde berichten
 - [X] Zie maximaal 50 berichten. De oudste berichten zijn verborgen.
+
+
+## API
+De quizvragen en antwoorden komen uit [deze trivia API](https://the-trivia-api.com/). The Trivia API is de grootste internet trivia API en bevat meer dan 9.777 goedgekeurde vragen, verdeeld over 10 categorieën. Deze API is te gebruiken zonder API key, wat het makkelijker maakt voor anderen om ook aan deze app te gaan werken.
+
 
 
 ## Schetsen
