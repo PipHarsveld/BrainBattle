@@ -3,9 +3,9 @@
 # Chatroom App
 
 Voor het vak Realtime Web hebben we met een groepje een basic Chatroom app gemaakt, genaamd SpeakEasy. Deze app hebben we gemaakt met Node.js, Express en Socket.io.
-Voor het individuele deel ga ik een Trivia app maken, waarbij je met meerdere mensen tegelijkertijd een quiz kunt doen. De quizvragen en antwoorden komen uit [deze trivia API](https://the-trivia-api.com/). Deze API is te gebruiken zonder API key.
 
-Ik ben nog niet echt begonnen aan deze trivia app, dus de live link gaat naar de SpeakEasy app.
+
+Voor het individuele deel ga ik een Trivia app maken, waarbij je met meerdere mensen tegelijkertijd een quiz kunt doen. De quizvragen en antwoorden komen uit [deze trivia API](https://the-trivia-api.com/). Deze API is te gebruiken zonder API key. Ik ben nog niet echt begonnen aan deze trivia app, dus de live link gaat naar de SpeakEasy app.
 
 
 
