@@ -2,24 +2,29 @@
 
 # Chatroom App
 
-Voor het vak Realtime Web gaan we samen een basic Chatroom app maken. Deze app gaan we maken met Node.js, Express en Socket.io.
+Voor het vak Realtime Web hebben we met een groepje een basic Chatroom app gemaakt, genaamd SpeakEasy. Deze app hebben we gemaakt met Node.js, Express en Socket.io.
+Voor het individuele deel ga ik een Trivia app maken, waarbij je met meerdere mensen tegelijkertijd een quiz kunt doen. De quizvragen en antwoorden komen uit [deze trivia API](https://the-trivia-api.com/). Deze API is te gebruiken zonder API key.
 
-
-BrainBattle
-(description of our project)
-
+Ik ben nog niet echt begonnen aan deze trivia app, dus de live link gaat naar de SpeakEasy app.
 
 
 
 ## Table of Contents
-* [Taakverdeling](#taakverdeling)
+* [Features](#features)
 * [Schetsen](#schetsen)
 * [Coding style](#coding-style)
 * [Installeren](#installeren)
-* [Gebruik van het project](#gebruik-van-het-project)
-* [Features](#features)
+* [Maker](#maker)
 * [License](#license)
 
+
+## Features
+- [X] Kies een nickname
+- [X] Verstuur berichten
+- [X] Ontvang berichten van andere gebruikers
+- [X] Zie wanneer een een andere gebruiker aan het typen is
+- [X] Zie de geschiedenis van de gestuurde berichten
+- [X] Zie maximaal 50 berichten. De oudste berichten zijn verborgen.
 
 
 ## Schetsen
@@ -80,11 +85,7 @@ Yes, je bent nu helemaal klaar! Ga naar `http://localhost:4200/` en geniet van S
 
 
 
-## Features
-- [X] Kies een nickname
-- [X] Verstuur berichten
-- [X] Ontvang berichten van andere gebruikers
-- [X] Zie wanneer een een andere gebruiker aan het typen is
+
 
 
 
