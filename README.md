@@ -59,7 +59,7 @@ Om ervoor te zorgen dat onze code overzichtelijk en netjes is, hebben we een aan
 
 
 ## Installeren
-Om deze app te gebruiken, moet je deze repository clonen. Je kunt dit doen door het volgende commando in je terminal te typen:
+Om aan deze app te werken, moet je deze repository clonen. Je kunt dit doen door het volgende commando in je terminal te typen:
 
 ```
 git clone 
