@@ -1,6 +1,6 @@
 # Brain Battle
 
-Voor het vak Realtime Web hebben we met een groepje een basic Chatroom app gemaakt, genaamd SpeakEas, die ik als basis ga gebruiken voor mijn individuele app.
+Voor het vak Realtime Web hebben we met een groepje een basic Chatroom app gemaakt, genaamd SpeakEasy, die ik als basis ga gebruiken voor mijn individuele app.
 
 Voor het individuele deel ga ik een Trivia app maken, waarbij je met meerdere mensen tegelijkertijd een quiz kunt doen. Ik ben nog niet echt begonnen aan deze trivia app, dus de live link gaat naar de SpeakEasy app.
 
