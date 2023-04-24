@@ -46,8 +46,39 @@ Ik wil beginnen met een zo simpel mogelijke app die alleen de basis functionalit
 
 
 ## API
-De quizvragen en antwoorden komen uit [deze trivia API](https://the-trivia-api.com/). The Trivia API is de grootste internet trivia API en bevat meer dan 9.777 goedgekeurde vragen, verdeeld over 10 categorieën. Deze API is te gebruiken zonder API key, wat het makkelijker maakt voor anderen om ook aan deze app te gaan werken.
+De quizvragen en antwoorden komen uit [deze trivia API](https://the-trivia-api.com/). The Trivia API is de grootste internet trivia API en bevat meer dan 9.777 goedgekeurde vragen, verdeeld over 10 categorieën. 
 
+### Authentication
+Deze API is te gebruiken zonder API key, wat het makkelijker maakt voor anderen om ook aan deze app te gaan werken. 
+
+### Rate Limiting
+De API heeft een rate limit van 5 requests per seconde voor elk IP-adres, dit is dus voldoende voor mijn app.
+
+### Endpoints
+De trivia API heeft twee endpoints:
+- GET /v1/categories: Geeft een lijst met beschikbare categorieën van trivia vragen. Je kunt deze endpoint gebruiken om een lijst met categorieën en hun bijbehorende IDs te krijgen, waarmee je vervolgens vragen uit specifieke categorieën kunt ophalen.
+- GET /v1/questions: Geeft een willekeurige trivia vraag uit de database. Je kunt optionele query parameters opgeven voor de categorie en moeilijkheidsgraad van de vraag. Als je geen parameters opgeeft, geeft de endpoint een willekeurige vraag uit elke categorie en moeilijkheidsgraad.
+
+Voor mijn app ga ik gebruik maken van de GET /v1/questions endpoint, omdat ik dan een willekeurige vraag kan ophalen uit elke categorie en moeilijkheidsgraad.
+
+### Response format
+De API geeft JSON data terug met daarin de vraag, het antwoord, de categorie en de moeilijkheidsgraad van de vraag. Om het aantal gekregen vragen te beïvloeden kun je de query parameter `limit` gebruiken. De default waarde is 10, maar je kunt ook een waarde tussen 1 en 100 opgeven.
+
+```
+https://the-trivia-api.com/v1/questions?limit=20
+```
+
+### Voorbeeld API request
+API request om willekeurige trivia vragen op te halen:
+```
+https://the-trivia-api.com/v2/questions
+```
+
+API request om trivia vragen op te halen in de categorie science en met de moeilijkheidsgraad medium:
+
+```
+https://the-trivia-api.com/v1/questions?category=science&difficulty=medium
+```
 
 
 ## Schetsen
