@@ -7,7 +7,9 @@ Voor het individuele deel ga ik een Trivia app maken, waarbij je met meerdere me
 
 
 ## Table of Contents
+* [Concept](#concept)
 * [Features](#features)
+* [API](#api)
 * [Schetsen](#schetsen)
 * [Coding style](#coding-style)
 * [Installeren](#installeren)
@@ -15,13 +17,32 @@ Voor het individuele deel ga ik een Trivia app maken, waarbij je met meerdere me
 * [License](#license)
 
 
+
+## Concept
+Ik wil een app maken waarbij vrienden tegen elkaar een spelletje trivia kunnen spelen. De gebruikers komen eerst in een verzamelruimte, waarbij vrienden het spel kunnen joinen.De gebruikers kunnen dan een nickname kiezen en zodra alle vrienden aanwezig zijn; een quiz starten. De quizvragen komen uit een tivia API, waarover ik [hier meer details](#api) over geschreven heb. De gebruikers zien vervolgens allemaal tegelijk de vraag en 4 antwoord opties, waarvan ze er een kunnen kiezen. Na een aantal seconden is de antwoordtijd voorbij en wordt er in de achtergrond van de app bekeken welke gebruiker het juiste antwoord had. Voor elk goed antwoord krijgt de gebruiker een punt, en zo wordt er een winnaar bepaald. Aan het einde van de quiz wordt er een scorebord getoond met de namen van de gebruikers en hun score, en kan er een nieuwe quiz gestart worden.
+
+### Opties voor uitbereiden
+Ik wil beginnen met een zo simpel mogelijke app die alleen de basis functionaliteiten heeft, aangezien ik dit al een hele uitdaging vind. Als ik meer tijd heb, heb ik wel al een aantal ideeën voor uitbreidingen:
+- [ ] Meerdere rooms die betreden kunnen worden door het invullen van een roomcode
+- [ ] Naast het kiezen van een nickname, ook een profielfoto kunnen uploaden of kiezen uit een aantal aangeboden characters. Elk persoon zou ook een random character kunnen krijgen.
+- [ ] Optie voor de gebruiker om een nieuwe room te maken met instellingen voor het aantal vragen, de categorie van de vragen en moeilijkheid van de vragen
+- [ ] Verschillende punten toekennen op basis van de snelheid van het antwoord (eerste persoon krijgt 5 punten, tweede persoon krijgt 4 punten etc.)
+
+### Benodigde schermen
+- [ ] Welkomsscherm waar je een nickname kan kiezen
+- [ ] Scherm met een overzicht van alle aanwezige gebruikers en een optie om te chatten
+- [ ] Scherm met een quizvraag en 4 antwoordopties
+- [ ] Scherm met het goede antwoord
+- [ ] Scherm met een scorebord en een optie om een nieuwe quiz te starten
+
+
 ## Features
-- [X] Kies een nickname
-- [X] Verstuur berichten
-- [X] Ontvang berichten van andere gebruikers
-- [X] Zie wanneer een een andere gebruiker aan het typen is
-- [X] Zie de geschiedenis van de gestuurde berichten
-- [X] Zie maximaal 50 berichten. De oudste berichten zijn verborgen.
+- [ ] Kies een nickname
+- [ ] Sla de nickname op
+- [ ] Verstuur berichten
+- [ ] Ontvang berichten van andere gebruikers
+- [ ] Zie wanneer een een andere gebruiker aan het typen is
+
 
 
 ## API
