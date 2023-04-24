@@ -1,0 +1,89 @@
+/*************/
+/* FONTS */
+/*************/
+@import url("https://use.typekit.net/myy2iyg.css");
+
+/*************/
+/* CSS RESET */
+/*************/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    line-height: 1.5;
+    overflow: hidden;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    text-indent: 0;
+    list-style-type: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+/*********************/
+/* CUSTOM PROPERTIES */
+/*********************/
+:root {
+  --background-black: #242424;
+  --frame-black: #5C5C5C;
+  --white: #fff;
+
+  --decoration-orange: #FBB95C;
+  --decoration-pink: #FFD1DC;
+  --decoration-purple: #C1B0E1;
+  --decoration-yellow: #FDFD96;
+  --decoration-green: #CBF3B7;
+}
+
+
+
+/**************/
+/*** BASICS ***/
+/**************/
+
+
+
+
+
+
+/***************/
+/*media queries*/
+/***************/
+
+@media (min-width: 60em) {
+  main section ul {
+    width: 50em;
+  }
+  main section form input {
+    width: 50em;
+  }
+
+}
