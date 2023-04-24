@@ -5,7 +5,6 @@ Voor het vak Realtime Web hebben we met een groepje een basic Chatroom app gemaa
 Voor het individuele deel ga ik een Trivia app maken, waarbij je met meerdere mensen tegelijkertijd een quiz kunt doen. Ik ben nog niet echt begonnen aan deze trivia app, dus de live link gaat naar de SpeakEasy app.
 
 
-
 ## Table of Contents
 * [Concept](#concept)
 * [Features](#features)
@@ -17,9 +16,8 @@ Voor het individuele deel ga ik een Trivia app maken, waarbij je met meerdere me
 * [License](#license)
 
 
-
 ## Concept
-Ik wil een app maken waarbij vrienden tegen elkaar een spelletje trivia kunnen spelen. De gebruikers komen eerst in een verzamelruimte, waarbij vrienden het spel kunnen joinen.De gebruikers kunnen dan een nickname kiezen en zodra alle vrienden aanwezig zijn; een quiz starten. De quizvragen komen uit een tivia API, waarover ik [hier meer details](#api) over geschreven heb. De gebruikers zien vervolgens allemaal tegelijk de vraag en 4 antwoord opties, waarvan ze er een kunnen kiezen. Na een aantal seconden is de antwoordtijd voorbij en wordt er in de achtergrond van de app bekeken welke gebruiker het juiste antwoord had. Voor elk goed antwoord krijgt de gebruiker een punt, en zo wordt er een winnaar bepaald. Aan het einde van de quiz wordt er een scorebord getoond met de namen van de gebruikers en hun score, en kan er een nieuwe quiz gestart worden.
+Ik wil een app maken waarbij vrienden tegen elkaar een spelletje trivia kunnen spelen. De gebruikers komen eerst in een verzamelruimte, waarbij vrienden het spel kunnen joinen. De gebruikers kunnen dan een nickname kiezen en zodra alle vrienden aanwezig zijn; een quiz starten. De quizvragen komen uit een tivia API, waarover ik [hier meer details](#api) over geschreven heb. De gebruikers zien vervolgens allemaal tegelijk de vraag en 4 antwoord opties, waarvan ze er een kunnen kiezen. Na een aantal seconden is de antwoordtijd voorbij en wordt er in de achtergrond van de app bekeken welke gebruiker het juiste antwoord had. Voor elk goed antwoord krijgt de gebruiker een punt, en zo wordt er een winnaar bepaald. Aan het einde van de quiz wordt er een scorebord getoond met de namen van de gebruikers en hun score, en kan er een nieuwe quiz gestart worden.
 
 ### Opties voor uitbereiden
 Ik wil beginnen met een zo simpel mogelijke app die alleen de basis functionaliteiten heeft, aangezien ik dit al een hele uitdaging vind. Als ik meer tijd heb, heb ik wel al een aantal ideeën voor uitbreidingen:
@@ -35,6 +33,9 @@ Ik wil beginnen met een zo simpel mogelijke app die alleen de basis functionalit
 - [ ] Scherm met het goede antwoord
 - [ ] Scherm met een scorebord en een optie om een nieuwe quiz te starten
 
+### Feedback op concept van Justus
+Begin klein, babysteps, en bereid het daarna uit. Er staat een goede tutorial over rooms op de socket.io website, kijk daar naar en begin met het maken van verschillende rooms. De moeilijkheid van dit concept zit hem in de rondes. Na het maken van de rooms kun je het beste aan de slag gaan met het uitwerken van één ronde, dus het genereren van een random vraag en deze sturen naar alle gebruikers. Voeg daarna een timer toe en zorg dat na die tijd gebruikers geen antwoord meer kunnen geven. Vervolgens kun je het antwoord controleren en de punten toekennen. Als dit allemaal werkend is, kun je gaan uitbreiden met meerdere rondes en een scorebord. 
+
 
 ## Features
 - [ ] Kies een nickname
@@ -42,8 +43,6 @@ Ik wil beginnen met een zo simpel mogelijke app die alleen de basis functionalit
 - [ ] Verstuur berichten
 - [ ] Ontvang berichten van andere gebruikers
 - [ ] Zie wanneer een een andere gebruiker aan het typen is
-
-
 
 ## API
 De quizvragen en antwoorden komen uit [deze trivia API](https://the-trivia-api.com/). The Trivia API is de grootste internet trivia API en bevat meer dan 9.777 goedgekeurde vragen, verdeeld over 10 categorieën. 
