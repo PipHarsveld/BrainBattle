@@ -1,46 +1,37 @@
 let socket = io();
-let messages = document.querySelector('section ul');
-let inputText = document.querySelector('input#message');
-let inputName = document.querySelector('input#name');
-let send = document.querySelector('button#send');
-let typingState = document.querySelector('p');
+const createRoomBtn = document.getElementById("create-room-btn");
+const joinRoomBtn = document.querySelector("#join-room-btn");
+const roomNumberInput = document.querySelector("#room-number");
+const usernameInput = document.querySelector("#username");
 
-// send text
-document.querySelector('form').addEventListener('submit', event => {
-  event.preventDefault()
-  let data = { name: inputName.value, message: inputText.value }
-  socket.emit('chat', data);
+createRoomBtn.addEventListener("click", (e) => {
+  e.preventDefault();
 
-  console.log(inputName.value, inputText.value);
-  inputText.value = '';
-})
+  // Emit the createRoom event to the server
+  socket.emit("createRoom");
+});
 
-inputText.addEventListener('keypress', () => {
-  socket.emit('typing', inputName.value)
-})
+socket.on("roomCreated", (roomNumber) => {
+  console.log(`Room ${roomNumber} created`);
+  window.location.href = `/room/${roomNumber}`;
+});
 
-socket.on('history', (history) => {
-  history.forEach((data) => {
-    addMessage(data)
-  })
-})
+joinRoomBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  const username = usernameInput.value;
+  const roomNumber = roomNumberInput.value;
 
-function addMessage(data) {
-  messages.appendChild(Object.assign(document.createElement('li'), { textContent: data.name + ': ' + data.message }))
-  messages.scrollTop = messages.scrollHeight
-}
+  // Emit the joinRoom event to the server
+  socket.emit("joinRoom", {
+    username,
+    roomNumber,
+  });
 
-socket.on('chat', (data) => {
-  console.log(data);
-  messages.appendChild(Object.assign(document.createElement('li'), { textContent: data.name + ': ' + data.message }))
-  typingState.innerHTML= "";
-  messages.scrollTop = messages.scrollHeight
-})
+  // Listen for the roomJoined event from the server
+  socket.on("roomJoined", ({ roomNumber, username }) => {
+    console.log(`${username} joined room ${roomNumber}`);
+    console.log(roomNumber)
+    window.location.href = `/room/${roomNumber}`;
+  });
+});
 
-socket.on('typing', (inputName) => {
-  console.log(inputName);
-  typingState.innerHTML= ( inputName + " is aan het typen...")
-  setTimeout(() => {
-    typingState.innerHTML= "";
-  }, 3000);
-})

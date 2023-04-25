@@ -4,7 +4,6 @@ import dotenv from 'dotenv';
 import http from 'http';
 import handlebars from 'express-handlebars';
 import { Server } from 'socket.io';
-import { router } from './router/router.js'; 
 
 dotenv.config();
 
@@ -13,15 +12,12 @@ const port = process.env.PORT || 4242;
 const __dirname = path.resolve();
 const server = http.createServer(app);
 const io = new Server(server);
-const historySize = 50
-let history = []
 
 // Link the templating engine to the express app
 app.set('view engine', 'hbs');
 app.set('views', 'views');
 
 
-app.use('/', router);
 app.use(express.static(__dirname + '/static')); //Css, images en javascript
 app.use('/', express.static(__dirname + '/'));
 
@@ -32,31 +28,56 @@ app.engine('hbs', handlebars.engine({
     partialsDir: __dirname + '/views/partials'
 }));
 
+app.get('/', (req, res) => {
+    res.render('main', { layout: 'index' });
+})
+
+app.get("/room/:roomNumber", (req, res) => {
+    const { roomNumber } = req.params;
+
+    // Render the room page with the room number passed as a parameter
+    res.render("room", { layout: "index", roomNumber });
+});
+
 
 io.on('connection', (socket) => {
     console.log('a user connected');
-    socket.emit('history', history)
 
-    socket.on('chat', (data) => {
-        console.log(data);
+    socket.on("createRoom", () => {
+        const roomNumber = generateRoomNumber();
+        socket.join(roomNumber);
+        console.log(`Room ${roomNumber} created`);
 
-        while (history.length > historySize) {
-            history.shift()
-        }
-        history.push(data)
+        // Add the room to the adapter rooms object
+        // io.sockets.adapter.rooms.set(roomNumber, new Set());
 
-        io.sockets.emit("chat", data);
+
+        // const roomNumbers = Array.from(io.sockets.adapter.rooms.keys());
+        // console.log(roomNumbers);
+
+        socket.emit("roomCreated", roomNumber);
     });
 
-    socket.on('typing', (inputName) => {
-        console.log("Aan het typen");
-        socket.broadcast.emit("typing", inputName);
+    socket.on("joinRoom", ({ username, roomNumber }) => {
+        console.log(io.sockets.adapter.rooms);
+        // if (io.sockets.adapter.rooms.has(roomNumber)) {
+            console.log(`User ${username} joined room ${roomNumber}`);
+            socket.join(`${roomNumber}`);
+            socket.emit("roomJoined", { roomNumber, username });
+        // } else {
+            // console.log(`Room ${roomNumber} does not exist`);
+        // }
     });
 
     socket.on('disconnect', () => {
-        console.log('user disconnected')
-    })
+        console.log('user disconnected');
+    });
 });
+
+
+const generateRoomNumber = () => {
+    return Math.floor(Math.random() * 90000) + 10000;
+};
 
 
 server.listen(port, () => {
