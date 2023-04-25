@@ -2,5 +2,22 @@
     {{> header}}
 </header>
 <main class="main">
-    <h1>Hi</h1>
+    <p>Welcome to BrainBattle!</p>
+
+    <form>
+        <fieldset>
+            <legend>Enter your username</legend>
+            <input type="text" id="username" required />
+        </fieldset>
+        <fieldset>
+            <legend>Create a new room</legend>
+            <button class="btn" id="create-room-btn">Create new room</button>
+        </fieldset>
+        <fieldset>
+            <legend>Join an existing room</legend>
+            <input type="text" id="room-number" placeholder="Enter room number" />
+            <button class="btn" id="join-room-btn">Join room</button>
+        </fieldset>
+        <div id="error"></div>
+    </form>
 </main>
