@@ -4,20 +4,19 @@
 <main class="main">
     <p>Welcome to BrainBattle!</p>
 
-    <form>
+    <form method="POST">
         <fieldset>
             <legend>Enter your username</legend>
-            <input type="text" id="username" placeholder="Choose a nickname" required />
+            <input type="text" id="username" name="username" placeholder="Choose a nickname" required />
         </fieldset>
         <fieldset>
             <legend>Create a new room</legend>
-            <button class="btn" id="create-room-btn">Create new room</button>
+            <button class="btn" id="create-room-btn" value="newRoom" type="submit">Create new room</button>
         </fieldset>
         <fieldset>
             <legend>Join an existing room</legend>
             <input type="text" id="room-number" placeholder="Enter room number" />
-            <button class="btn" id="join-room-btn">Join room</button>
+            <button class="btn" id="join-room-btn" value="joinRoom" type="submit">Join room</button>
         </fieldset>
-        <div id="error"></div>
     </form>
 </main>
