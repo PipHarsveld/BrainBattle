@@ -35,21 +35,26 @@ app.get('/', (req, res) => {
     res.render('main', { layout: 'index' });
 })
 
-app.get("/room/:roomNumber", (req, res, next) => {
+app.get("/room/:roomNumber", (req, res) => {
     const { roomNumber } = req.params;
-    console.log(roomNumber)
-    console.log(io.sockets.adapter.rooms)
+    const username = req.query.username;
+
+    console.log(req)
 
     // Check if the room is active
     if (!activeRooms.includes(roomNumber)) {
-        console.log("Heb even gekeken, maar dit roomnummer staat niet in de array")
+        console.log("The roomnumber is not in the activeRooms array")
         // If the room does not exist, render an error page or redirect the user
-        // return res.render("error", { layout: "index", message: "Room not found" });
+        return res.render("error", { layout: "index", message: "Room not found" });
     }
 
     // If the room exists, render the room page with the room number passed as a parameter
-    res.render("room", { layout: "index", roomNumber });
+    res.render("room", { layout: "index", roomNumber, username: username });
 });
+
+app.get('/error', (req, res) => {
+    res.render('error', { layout: 'index' });
+})
 
 
 // app.get("/quiz", async (req, res) => {
@@ -74,8 +79,7 @@ app.get("/room/:roomNumber", (req, res, next) => {
 io.on('connection', (socket) => {
     console.log('a user connected');
 
-    socket.on("createRoom", (room) => {
-        console.log(socket.rooms);
+    socket.on("createRoom", (room, username) => {
         const roomNumber = room;
         socket.join(roomNumber);
         console.log(socket.rooms);
@@ -86,19 +90,21 @@ io.on('connection', (socket) => {
         console.log('activeRooms updated', activeRooms);
     
         // Emit the roomCreated event only to the socket that triggered the createRoom event
-        socket.emit("roomCreated", roomNumber);
+        socket.emit("roomCreated", roomNumber, username);
     });
 
-    socket.on("joinRoom", ({ username, roomNumber }) => {
+    socket.on("joinRoom", ({ username, roomNumber, res }) => {
         // Check if the room is active
         const socketRooms = socket.rooms;
         console.log('joinRoom', socketRooms);
         if (activeRooms.includes(roomNumber)) {
-            console.log(`User ${username} joined room ${roomNumber}`);
+            console.log(`${username} joined room ${roomNumber}`);
             socket.join(`${roomNumber}`);
             socket.emit("roomJoined", { roomNumber, username });
         } else {
             console.log(`Room ${roomNumber} does not exist`);
+            // Render the error page
+            socket.emit("roomNotFound", { roomNumber, username });
         }
     });
 
