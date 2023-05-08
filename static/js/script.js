@@ -1,13 +1,54 @@
 let socket = io();
 
 const url = window.location.href;
+const usernameInput = document.querySelector("#username");
 
 if (url.includes("room")) {
     console.log("chat page");
+
+    let messages = document.querySelector('section ul');
+    let inputText = document.querySelector('input#message');
+    let send = document.querySelector('button#send');
+    let typingState = document.querySelector('.room>section>p');
+
+    // Read the username from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const username = urlParams.get('username');
+    const roomNumber = url.split('/').pop().split('?')[0];
+    console.log(roomNumber);
+
+    // send text
+    document.querySelector('form').addEventListener('submit', event => {
+        event.preventDefault()
+        let data = { name: username, message: inputText.value, roomNumber: roomNumber }
+        socket.emit('chat', data);
+
+        inputText.value = '';
+    })
+
+    // inputText.addEventListener('keypress', () => {
+    //     socket.emit('typing', inputName.value)
+    // })
+
+    socket.on('chat', (data) => {
+        console.log(data);
+        messages.appendChild(Object.assign(document.createElement('li'), { textContent: data.name + ': ' + data.message }))
+        typingState.innerHTML = "";
+        messages.scrollTop = messages.scrollHeight
+    })
+
+    // socket.on('typing', (inputName) => {
+    //     console.log(inputName);
+    //     typingState.innerHTML = (inputName + " is aan het typen...")
+    //     setTimeout(() => {
+    //         typingState.innerHTML = "";
+    //     }, 3000);
+    // })
+
+
 } else if (url.includes("error")) {
     console.log("error page");
 } else {
-    const usernameInput = document.querySelector("#username");
     const form = document.querySelector("form");
 
     form.addEventListener("submit", (event) => {
@@ -25,7 +66,7 @@ if (url.includes("room")) {
             console.log('join-room-btn');
 
             const roomNumberInput = document.querySelector("#room-number");
-            console.log('input element: ' + roomNumberInput);
+            console.log(username + ' : ' + roomNumberInput);
 
             const roomNumber = roomNumberInput.value;
             console.log('roomnumber' + roomNumber);
@@ -34,40 +75,14 @@ if (url.includes("room")) {
             socket.emit("joinRoom", { roomNumber: roomNumber, username: username, res: null });
         }
 
+        function readValues() {
+            const username = usernameInput.value;
+            return username;
+        }
+
         event.preventDefault();
     });
 
-
-    // form.addEventListener("submit", (e) => {
-    //     const username = readValues();
-    //     // console.log(username);
-    //     e.preventDefault();
-
-    //     const randomnumber = generateRoomNumber();
-    //     const roomnumber = randomnumber.toString();
-
-    //     // Emit the createRoom event to the server with the username
-    //     socket.emit("createRoom", roomnumber, username);
-    // });
-
-    // joinRoomBtn.addEventListener("click", (e) => {
-    //     e.preventDefault();
-
-    //     const username = usernameInput.value;
-    //     const roomNumber = roomNumberInput.value;
-
-    //     // Emit the joinRoom event to the server with the username and roomNumber
-    //     socket.emit("joinRoom", {
-    //         username,
-    //         roomNumber,
-    //     });
-    //});
-
-
-    function readValues() {
-        const username = usernameInput.value;
-        return username;
-    }
 }
 
 

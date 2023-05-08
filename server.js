@@ -39,6 +39,7 @@ app.get("/room/:roomNumber", (req, res) => {
     const { roomNumber } = req.params;
     const username = req.query.username;
 
+
     // Check if the room is active
     if (!activeRooms.includes(roomNumber)) {
         console.log("The roomnumber is not in the activeRooms array")
@@ -104,6 +105,12 @@ io.on('connection', (socket) => {
             // Render the error page
             socket.emit("roomNotFound", { roomNumber, username });
         }
+    });
+
+    socket.on('chat', (data) => {
+        console.log(data);
+        // io.to(data.room).emit("chat", data); WERKT NIET??????????????????????????????????????????????????????????????????????????
+        io.sockets.emit("chat", data);
     });
 
     socket.on('disconnect', () => {
