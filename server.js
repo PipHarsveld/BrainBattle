@@ -39,8 +39,6 @@ app.get("/room/:roomNumber", (req, res) => {
     const { roomNumber } = req.params;
     const username = req.query.username;
 
-    console.log(req)
-
     // Check if the room is active
     if (!activeRooms.includes(roomNumber)) {
         console.log("The roomnumber is not in the activeRooms array")
