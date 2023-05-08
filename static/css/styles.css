@@ -45,6 +45,18 @@ li {
 
 button {
     cursor: pointer;
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    outline: inherit;
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
 }
 
 
@@ -52,15 +64,11 @@ button {
 /* CUSTOM PROPERTIES */
 /*********************/
 :root {
-  --background-black: #242424;
-  --frame-black: #5C5C5C;
-  --white: #fff;
-
-  --decoration-orange: #FBB95C;
-  --decoration-pink: #FFD1DC;
-  --decoration-purple: #C1B0E1;
-  --decoration-yellow: #FDFD96;
-  --decoration-green: #CBF3B7;
+    --background-color: #EFEEFC;
+    --inputFields-color: #fff;
+    --text-color: #000000;
+    --placeholdetText-color: #A0A0A0;
+    --accent-color: #6A5AE0;
 }
 
 
@@ -68,10 +76,56 @@ button {
 /**************/
 /*** BASICS ***/
 /**************/
+html {
+    background-color: var(--background-color);
+    font-family: "omnes-georgian",sans-serif;
+}
+
+body{
+    width: 100vw;
+    max-width: 30rem;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+fieldset{
+    display: block;
+}
+
+fieldset>legend {
+    opacity: 0;
+}
+
+fieldset>button {
+    background-color: var(--accent-color);
+    color: var(--inputFields-color);
+    padding: 0.5em 1em;
+    width: 100%;
+    border-radius: 1rem;
+}
+
+fieldset>button:hover {
+    background-color: #5b4ad8;
+}
 
 
+.main{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
 
+.main input{
+    width: 100%;
+    height: 3.1875rem;
+    padding-left: 1rem;
+    border-radius: 1rem;
+    border: none;
+}
 
+.main fieldset:first-of-type{
+    margin-bottom: 4rem;
+}
 
 
 /***************/
@@ -79,11 +133,12 @@ button {
 /***************/
 
 @media (min-width: 60em) {
-  main section ul {
-    width: 50em;
-  }
-  main section form input {
-    width: 50em;
-  }
+    main section ul {
+        width: 50em;
+    }
+
+    main section form input {
+        width: 50em;
+    }
 
 }
