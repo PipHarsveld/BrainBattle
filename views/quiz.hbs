@@ -4,4 +4,9 @@
 <main class="quiz">
     <p>Here's your first question:</p>
     <p>{{ question }}</p>
+    <section>
+        {{#each answers}}
+            <button value="{{ this }}">{{ this }}</button>
+        {{/each}}
+    </section>
 </main>

@@ -9,7 +9,7 @@ if (url.includes("room")) {
     let messages = document.querySelector('section ul');
     let inputText = document.querySelector('input#message');
     let send = document.querySelector('button#send');
-    // let typingState = document.querySelector('.room>section>p');
+    let typingState = document.querySelector('.room>section>p');
 
     // Read the username from the URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -28,26 +28,26 @@ if (url.includes("room")) {
         inputText.value = '';
     })
 
-    // inputText.addEventListener('keypress', () => {
-    //     socket.emit('typing', inputName.value)
-    // })
+    inputText.addEventListener('keypress', (username) => {
+        socket.emit('typing', username)
+    })
 
     socket.on('chat', (data) => {
         console.log(data);
         messages.appendChild(Object.assign(document.createElement('li'), { textContent: data.name + ': ' + data.message }));
-        // typingState.innerHTML = "";
-        // messages.scrollTop = messages.scrollHeight;
+        typingState.innerHTML = "";
+        messages.scrollTop = messages.scrollHeight;
     })
 
-    // socket.on('typing', (inputName) => {
-    //     console.log(inputName);
-    //     typingState.innerHTML = (inputName + " is aan het typen...")
-    //     setTimeout(() => {
-    //         typingState.innerHTML = "";
-    //     }, 3000);
-    // })
+    socket.on('typing', (username) => {
+        typingState.innerHTML = (username + " is aan het typen...")
+        setTimeout(() => {
+            typingState.innerHTML = "";
+        }, 3000);
+    })
 
-
+} else if (url.includes("quiz")) {
+        console.log("quiz page");
 } else if (url.includes("error")) {
     console.log("error page");
 } else {
@@ -64,7 +64,7 @@ if (url.includes("room")) {
             console.log('create-room-btn');
             // Emit the createRoom event to the server with the username
             socket.emit("createRoom", roomNumber, username);
-        } else if (button === "join-room-btn") { 
+        } else if (button === "join-room-btn") {
             console.log('join-room-btn');
 
             const roomNumberInput = document.querySelector("#room-number");
@@ -105,6 +105,20 @@ socket.on("roomJoined", ({ roomNumber, username }) => {
     console.log(`${username} joined room ${roomNumber}`);
     window.location.href = `/room/${roomNumber}?username=${username}`;
 });
+
+socket.on("sendCorrectAnswer", (firstQuestionCorrectAnswer) => {
+    const buttonsContainer = document.querySelector(".quiz>section");
+
+    buttonsContainer.addEventListener('click', (event) => {
+        // Check if the clicked element is a button
+        if (event.target.tagName === 'BUTTON') {
+            // Handle the button click event here
+            console.log('Button clicked:', event.target.textContent);
+            const clickedAnswer = event.target.textContent;
+            socket.emit("sendAnswers", clickedAnswer, firstQuestionCorrectAnswer);
+        }
+    });
+})  
 
 socket.on("roomNotFound", ({ roomNumber }) => {
     // Render the error page

@@ -1,9 +1,10 @@
 import path from 'path';
 import express from 'express';
 import dotenv from 'dotenv';
-import http from 'http';
+import http, { get } from 'http';
 import handlebars from 'express-handlebars';
 import { Server } from 'socket.io';
+import fetch from 'node-fetch';
 
 dotenv.config();
 
@@ -56,23 +57,58 @@ app.get('/error', (req, res) => {
 })
 
 
-// app.get("/quiz", async (req, res) => {
-//     try {
-//       const response = await fetch("https://the-trivia-api.com/questions?limit=10");
-//       console.log('response: ' + response)
-//       const data = await response.text(); // convert the response to a string
-//       console.log('data: ' + data)
-//       const questions = JSON.parse(data); // parse the string into JSON
-//         console.log('questions: ' + questions)
+app.get("/quiz", async (req, res) => {
+    try {
+        const response = await fetch("https://the-trivia-api.com/v2/questions?limit=10");
+        const data = await response.json(); // parse the response as JSON
 
+        const questions = [];
+        const allAnswers = [];
 
-//       res.json({ question: questions[0].question });
-//     } catch (err) {
-//       console.error(err.message);
-//       res.status(500).send("An error occurred while retrieving the questions.");
-//     }
-// });
+        for (let i = 0; i < data.length; i++) {
+            const question = data[i].question.text;
+            const correctAnswer = data[i].correctAnswer;
+            const incorrectAnswers = data[i].incorrectAnswers;
 
+            const answers = [correctAnswer, ...incorrectAnswers];
+            // Shuffle the answers using the Fisher-Yates shuffle algorithm
+            for (let i = answers.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [answers[i], answers[j]] = [answers[j], answers[i]];
+            }
+
+            allAnswers.push(answers);
+            questions.push({ question: question, answers: answers });
+        }
+
+        const firstQuestion = questions[0].question;
+        console.log('Question:', firstQuestion);
+
+        const firstQuestionAnswers = allAnswers[0];
+        console.log('Answers:', firstQuestionAnswers);
+
+        const firstQuestionCorrectAnswer = data[0].correctAnswer;
+        console.log('Correct answer:', firstQuestionCorrectAnswer);
+
+        io.on('connection', (socket) => {
+            socket.emit('sendCorrectAnswer', firstQuestionCorrectAnswer);
+
+            socket.on('sendAnswers', (clickedAnswer, firstQuestionCorrectAnswer) => {
+                // check if answer is correct
+                if (clickedAnswer === firstQuestionCorrectAnswer) {
+                    console.log('Correct answer');
+                } else {
+                    console.log('Wrong answer');
+                }
+            });
+        });
+
+        res.render("quiz", { layout: "index", question: firstQuestion, answers: firstQuestionAnswers, correctAnswer: firstQuestionCorrectAnswer });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("An error occurred while retrieving the questions.");
+    }
+});
 
 
 io.on('connection', (socket) => {
