@@ -9,13 +9,15 @@ if (url.includes("room")) {
     let messages = document.querySelector('section ul');
     let inputText = document.querySelector('input#message');
     let send = document.querySelector('button#send');
-    let typingState = document.querySelector('.room>section>p');
+    // let typingState = document.querySelector('.room>section>p');
 
     // Read the username from the URL
     const urlParams = new URLSearchParams(window.location.search);
     const username = urlParams.get('username');
     const roomNumber = url.split('/').pop().split('?')[0];
     console.log(roomNumber);
+
+    socket.emit("rejoinRoom", roomNumber, username);
 
     // send text
     document.querySelector('form').addEventListener('submit', event => {
@@ -32,9 +34,9 @@ if (url.includes("room")) {
 
     socket.on('chat', (data) => {
         console.log(data);
-        messages.appendChild(Object.assign(document.createElement('li'), { textContent: data.name + ': ' + data.message }))
-        typingState.innerHTML = "";
-        messages.scrollTop = messages.scrollHeight
+        messages.appendChild(Object.assign(document.createElement('li'), { textContent: data.name + ': ' + data.message }));
+        // typingState.innerHTML = "";
+        // messages.scrollTop = messages.scrollHeight;
     })
 
     // socket.on('typing', (inputName) => {

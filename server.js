@@ -83,11 +83,11 @@ io.on('connection', (socket) => {
         socket.join(roomNumber);
         console.log(socket.rooms);
         console.log(`Room ${roomNumber} created`);
-    
+
         // Add the room to the activeRooms array
         activeRooms.push(roomNumber);
         console.log('activeRooms updated', activeRooms);
-    
+
         // Emit the roomCreated event only to the socket that triggered the createRoom event
         socket.emit("roomCreated", roomNumber, username);
     });
@@ -107,10 +107,23 @@ io.on('connection', (socket) => {
         }
     });
 
+    socket.on("rejoinRoom", (roomNumber, username) => {
+        console.log('rejoinRoom');
+        socket.join(roomNumber);
+        console.log(socket.rooms);
+        // console.log(`Room ${roomNumber} created`);
+
+        // // Add the room to the activeRooms array
+        // activeRooms.push(roomNumber);
+        // console.log('activeRooms updated', activeRooms);
+    });
+
     socket.on('chat', (data) => {
         console.log(data);
-        // io.to(data.room).emit("chat", data); WERKT NIET??????????????????????????????????????????????????????????????????????????
-        io.sockets.emit("chat", data);
+        console.log(data.roomNumber)
+        console.log(socket.rooms)
+        io.to(data.roomNumber).emit("chat", data); // WERKT NIET???
+        //io.sockets.emit("chat", data);
     });
 
     socket.on('disconnect', () => {
