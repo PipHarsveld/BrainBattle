@@ -83,7 +83,7 @@ html {
 
 body{
     width: 100vw;
-    max-width: 30rem;
+    max-width: 35rem;
     margin: 0 auto;
     padding: 2rem;
 }
@@ -126,6 +126,17 @@ fieldset>button:hover {
 .main fieldset:first-of-type{
     margin-bottom: 4rem;
 }
+
+
+
+.room>section>form>fieldset{
+    display: flex;
+}
+
+.room>section>form>fieldset>input{
+    width: 100%;
+}
+
 
 
 /***************/
