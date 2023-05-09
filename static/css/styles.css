@@ -139,6 +139,16 @@ fieldset>button:hover {
 
 
 
+.quiz>section>button{
+    text-align: center;
+    width: 100%;
+    background-color: var(--accent-color);
+    margin-bottom: .5rem;
+    border-radius: 1rem;
+}
+
+
+
 /***************/
 /*media queries*/
 /***************/
