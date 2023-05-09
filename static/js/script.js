@@ -64,7 +64,7 @@ if (url.includes("room")) {
             console.log('create-room-btn');
             // Emit the createRoom event to the server with the username
             socket.emit("createRoom", roomNumber, username);
-        } else if (button === "join-room-btn") {
+        } else if (button === "join-room-btn") { 
             console.log('join-room-btn');
 
             const roomNumberInput = document.querySelector("#room-number");
