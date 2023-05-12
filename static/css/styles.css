@@ -78,17 +78,17 @@ fieldset {
 /**************/
 html {
     background-color: var(--background-color);
-    font-family: "omnes-georgian",sans-serif;
+    font-family: "omnes-georgian", sans-serif;
 }
 
-body{
+body {
     width: 100vw;
     max-width: 35rem;
     margin: 0 auto;
     padding: 2rem;
 }
 
-fieldset{
+fieldset {
     display: block;
 }
 
@@ -109,13 +109,27 @@ fieldset>button:hover {
 }
 
 
-.main{
+header>h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+header>h1>a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+header>h1>a:hover {
+    color: var(--accent-color);
+}
+
+.main {
     display: flex;
     flex-direction: column;
     text-align: center;
 }
 
-.main input{
+.main input {
     width: 100%;
     height: 3.1875rem;
     padding-left: 1rem;
@@ -123,25 +137,42 @@ fieldset>button:hover {
     border: none;
 }
 
-.main fieldset:first-of-type{
+.main fieldset:first-of-type {
     margin-bottom: 4rem;
 }
 
-
-.room>section>form>fieldset{
-    display: flex;
+.room>section {
+    height: 22rem;
+    position: relative;
+    overflow: hidden;
 }
 
-.room>section>form>fieldset>input{
+.room>section>form {
+    position: absolute;
+    bottom: 0;
     width: 100%;
 }
 
-.quiz>section>button{
+.room>section>form>fieldset {
+    display: flex;
+}
+
+.room>section>form>fieldset>input {
+    width: 100%;
+}
+
+.room>p {
+    margin-bottom: 1rem;
+}
+
+.quiz>section>button {
     text-align: center;
     width: 100%;
     background-color: var(--accent-color);
     margin-bottom: .5rem;
     border-radius: 1rem;
+    color: var(--inputFields-color);
+    padding: 0.5em 1em;
 }
 
 
@@ -149,10 +180,45 @@ fieldset>button:hover {
     background-color: #5b4ad8;
 }
 
-.quiz>a{
+.quiz>p {
+    margin-bottom: 1rem;
+}
+
+.quiz>a {
     display: none;
 }
 
+
+.button {
+    width: 100%;
+    padding: 0.5em 1em;
+    display: block;
+    border: 3px solid var(--accent-color);
+    color: var(--accent-color);
+    background-color: white;
+    border-radius: 1rem;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.botton:hover {
+    background-color: var(--accent-color);
+    color: var(--inputFields-color);
+}
+
+#send {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    width: 6rem;
+}
+
+#message {
+    border: 2px solid var(--accent-color);
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    padding-left: 1rem;
+}
 
 /***************/
 /*media queries*/
