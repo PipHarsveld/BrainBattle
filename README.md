@@ -175,6 +175,11 @@ Helaas waren mijn plannen groter en uitdagender dan ik van te voren had bedacht,
 - [] Na afloop van het spel een chatfunctie om het spel te bespreken
 - [] Mogelijkheid om een nieuw potje te starten
 
+
+## Reflectie
+Ik ben erg trots op het eindresultaat, maar ben ook zeker kritisch op mijn eigen werk. 
+
+
 ## Maker
 Deze Chatroom app is gemaakt door:
 [Pip Harsveld](https://github.com/PipHarsveld)
