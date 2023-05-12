@@ -123,11 +123,12 @@ Yes, je bent nu helemaal klaar! Ga naar `http://localhost:4200/` en have fun met
 
 
 ## Data lifecycle
-<!-- This would be a good place for your data life cycle ♻️-->
+<image src="https://github.com/PipHarsveld/BrainBattle/assets/54938035/bfdd4dea-4fb0-4fa8-b343-c68a18a4519d" height=400px>
 
 
-<!-- ## Coding style
-Om ervoor te zorgen dat onze code overzichtelijk en netjes is, hebben we een aantal regels opgesteld. Deze regels zijn:
+
+## Coding style
+Om ervoor te zorgen dat mijn code overzichtelijk en netjes is, hebben ik een aantal regels opgesteld. Deze regels zijn:
 
 **Html**
 
@@ -146,7 +147,7 @@ Om ervoor te zorgen dat onze code overzichtelijk en netjes is, hebben we een aan
 - Gebruik camelCase voor variabelen
 - Gebruik const en let in plaats van var
 - Schrijf comments waar nodig om de code te verduidelijken
-- Gebruik arrow functions -->
+- Gebruik arrow functions
 
 ## Rooms met socket.io
 Ik ben enorm veel tijd bezig geweest met het werkend krijgen van de verschillende rooms, wat nog vrij veel voeten in de aarde had. Bij het doorsturen van de gebruiker naar een nieuwe pagina, werd het roomnummer niet onthouden en de gebruiker uit de room gegooid. Samen met Shyanta heb ik een tijdje gekeken hoe we dit konden oplossen, maar helaas was het niet gelukt. Shyanta gaf toen als tip dat ik de rooms beter even links kan laten liggen, ondanks dat ik heel dichtbij was, en te gaan focussen op de API. Eigenwijs als ik ben, kon ik het niet laten rusten en heb ik toch een oplossing gevonden. Ik zie zelf ook in dat dit niet de meest nette manier is om te werken met rooms, maar zonder database en met de kennis die ik nu heb zag ik geen andere manier om in dezelfde room te blijven. Ik heb dit nu als volgt opgelost:
