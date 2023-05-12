@@ -12,8 +12,13 @@ BrainBattle is te spelen via [deze link](https://brainbattle.up.railway.app/)
 * [Concept](#concept)
 * [Features](#features)
 * [API](#api)
-* [Coding style](#coding-style)
 * [Installeren](#installeren)
+* [Data lifecycle](#data-lifecycle)
+* [Realtime events](#realtime-events)
+* [Rooms met socket.io](#rooms-met-socketio)
+* [Coding style](#coding-style)
+* [Wishlist](#wishlist)
+* [Reflectie](#reflectie)
 * [Maker](#maker)
 * [License](#license)
 
@@ -121,31 +126,75 @@ Yes, je bent nu helemaal klaar! Ga naar `http://localhost:4200/` en have fun met
 
 ## Realtime events
 <details>
-  <summary>Socket event: joe</summary>
+  <summary>Socket event: createRoom</summary>
+    <!-- Wanneer de gebruiker op de 'create room' knop klikt, wordt er een nieuwe room aangemaakt. Er wordt een random roomnumber gegenereed 
+    De gebruiker wordt vervolgens naar de room gestuurd en de room wordt toegevoegd aan de activeRooms array. De room wordt alleen toegevoegd aan de activeRooms array als de room nog niet bestaat. Als de room al bestaat, wordt de gebruiker naar de room gestuurd en wordt de room niet toegevoegd aan de activeRooms array. -->
+
+      Server side:
+    ```javascript
+    if (button === "create-room-btn") {
+        console.log('create-room-btn');
+        // Emit the createRoom event to the server with the username
+        socket.emit("createRoom", roomNumber, username);
+    }
+    ```
+  
+    Client side:
+    ```javascript
+    socket.on("createRoom", (room, username) => {
+        const roomNumber = room;
+        socket.join(roomNumber);
+        console.log(socket.rooms);
+        console.log(`Room ${roomNumber} created`);
+
+        // Add the room to the activeRooms array
+        activeRooms.push(roomNumber);
+        console.log('activeRooms updated', activeRooms);
+
+        // Emit the roomCreated event only to the socket that triggered the createRoom event
+        socket.emit("roomCreated", roomNumber, username);
+    });
+    ```
+
+
+    
+
+    
+</details>
+<details>
+  <summary>Socket event: roomCreated</summary>
+  blabla
+</details>
+<details>
+  <summary>Socket event: joinRoom</summary>
+  blabla
+</details>
+<details>
+  <summary>Socket event: roomJoined</summary>
+  blabla
+</details>
+<details>
+  <summary>Socket event: roomNotFound</summary>
+  blabla
+</details>
+<details>
+  <summary>Socket event: rejoinRoom</summary>
+  blabla
+</details>
+<details>
+  <summary>Socket event: chat</summary>
+  blabla
+</details>
+<details>
+  <summary>Socket event: typing</summary>
+  blabla
+</details>
+<details>
+  <summary>Socket event: sendCorrectAnswer</summary>
   blabla
 </details>
 
-## Coding style
-Om ervoor te zorgen dat mijn code overzichtelijk en netjes is, hebben ik een aantal regels opgesteld. Deze regels zijn:
 
-**Html**
-
-- Schrijf semantische HTML en gebruik niet onnodige `<div>`'s
-- Schrijf comments waar nodig om de code te verduidelijken
-- Gebruik regelmatig formatters om de code op te schonen
-
-**CSS**
-
-- Maak gebruik van CSS variabelen
-- Groepeer CSS met comments, alles van hetzelfde onderdeel bij elkaar
-- Gebruik relatieve eenheden voor afmetingen (Rem, em, %, etc.)
-
-**Javascript**
-
-- Gebruik camelCase voor variabelen
-- Gebruik const en let in plaats van var
-- Schrijf comments waar nodig om de code te verduidelijken
-- Gebruik arrow functions
 
 ## Rooms met socket.io
 Ik ben enorm veel tijd bezig geweest met het werkend krijgen van de verschillende rooms, wat nog vrij veel voeten in de aarde had. Bij het doorsturen van de gebruiker naar een nieuwe pagina, werd het roomnummer niet onthouden en de gebruiker uit de room gegooid. Samen met Shyanta heb ik een tijdje gekeken hoe we dit konden oplossen, maar helaas was het niet gelukt. Shyanta gaf toen als tip dat ik de rooms beter even links kan laten liggen, ondanks dat ik heel dichtbij was, en te gaan focussen op de API. Eigenwijs als ik ben, kon ik het niet laten rusten en heb ik toch een oplossing gevonden. Ik zie zelf ook in dat dit niet de meest nette manier is om te werken met rooms, maar zonder database en met de kennis die ik nu heb zag ik geen andere manier om in dezelfde room te blijven. Ik heb dit nu als volgt opgelost:
@@ -189,6 +238,28 @@ io.on('connection', (socket) => {
 
 Op deze manier komt de gebruiker weer terug in de room waar hij/zij in zat, zonder dat de gebruiker door heeft dat hij tijdelijk de room heeft verlaten. Dit is natuurlijk niet de meest nette manier om dit op te lossen, maar het werkt wel. Als ik meer tijd zou hebben, had ik mij hier mogelijk meer in kunnen verdiepen en een nettere oplossing kunnen vinden, maar ik ben enorm blij dat het op deze manier werkt.
 
+
+## Coding style
+Om ervoor te zorgen dat mijn code overzichtelijk en netjes is, hebben ik een aantal regels opgesteld. Deze regels zijn:
+
+**Html**
+
+- Schrijf semantische HTML en gebruik niet onnodige `<div>`'s
+- Schrijf comments waar nodig om de code te verduidelijken
+- Gebruik regelmatig formatters om de code op te schonen
+
+**CSS**
+
+- Maak gebruik van CSS variabelen
+- Groepeer CSS met comments, alles van hetzelfde onderdeel bij elkaar
+- Gebruik relatieve eenheden voor afmetingen (Rem, em, %, etc.)
+
+**Javascript**
+
+- Gebruik camelCase voor variabelen
+- Gebruik const en let in plaats van var
+- Schrijf comments waar nodig om de code te verduidelijken
+- Gebruik arrow functions
 
 ## Wishlist
 Helaas waren mijn plannen groter en uitdagender dan ik van te voren had bedacht, waardoor ik niet de tijd heb gehad om alles op mijn wishlist uit te werken. Mocht ik in de toekomst nog gaan verderwerken aan dit project, dan zijn dit de dingen die ik nog graag zou willen toevoegen:
