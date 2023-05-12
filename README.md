@@ -48,6 +48,7 @@ Begin klein, babysteps, en bereid het daarna uit. Er staat een goede tutorial ov
 - [X] Ontvang berichten van andere gebruikers in dezelfde room
 - [ ] Zie wanneer een een andere gebruiker aan het typen is
 
+
 ## API
 De quizvragen en antwoorden komen uit [deze trivia API](https://the-trivia-api.com/). The Trivia API is de grootste internet trivia API en bevat meer dan 9.777 goedgekeurde vragen, verdeeld over 10 categorieën. 
 
@@ -162,6 +163,29 @@ socket.on("roomJoined", ({ roomNumber, username }) => {
 });
 ```
 
+Vervolgens wordt op de room pagina in de clientside javascript het roomnummer en de gebruikersnaam uit de URL gehaald en meegestuurd met een socket emit naar de server.
+
+``` javascript
+// Read the username an roomnumber from the URL
+const urlParams = new URLSearchParams(window.location.search);
+const username = urlParams.get('username');
+const roomNumber = url.split('/').pop().split('?')[0];
+
+socket.emit("rejoinRoom", roomNumber, username);
+```
+
+De server ontvangt dit en joint opnieuw de room met de juiste roomcode, om zo de gebruiker terug te brengen naar de room waar hij/zij in zat.
+``` javascript
+io.on('connection', (socket) => {
+    socket.on("rejoinRoom", (roomNumber) => {
+        console.log('rejoinRoom');
+        socket.join(roomNumber);
+        console.log(socket.rooms);
+    });
+});
+```
+
+Op deze manier komt de gebruiker weer terug in de room waar hij/zij in zat, zonder dat de gebruiker door heeft dat hij tijdelijk de room heeft verlaten. Dit is natuurlijk niet de meest nette manier om dit op te lossen, maar het werkt wel. Als ik meer tijd zou hebben, had ik mij hier mogelijk meer in kunnen verdiepen en een nettere oplossing kunnen vinden, maar ik ben enorm blij dat het op deze manier werkt.
 
 
 ## Wishlist
