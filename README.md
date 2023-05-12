@@ -128,8 +128,8 @@ Yes, je bent nu helemaal klaar! Ga naar `http://localhost:4200/` en have fun met
 <details>
   <summary>Socket event: createRoom</summary>
     Wanneer de gebruiker op de 'create room' knop klikt, wordt er een nieuwe room aangemaakt. Er wordt een random roomnumber gegenereed en samen met de gebruikersnaam wordt dit naar de client gestuurd. Aan de clientside wordt de gebruiker dan toegevoegd aan de room met het gegenereerde roomnumber.
-    
     Server side:
+
 ```javascript
     if (button === "create-room-btn") {
         console.log('create-room-btn');
@@ -137,8 +137,29 @@ Yes, je bent nu helemaal klaar! Ga naar `http://localhost:4200/` en have fun met
         socket.emit("createRoom", roomNumber, username);
     }
 ```
-  
-    Client side:
+
+Client side:
+
+```javascript
+    socket.on("createRoom", (room, username) => {
+        const roomNumber = room;
+        socket.join(roomNumber);
+        console.log(socket.rooms);
+        console.log(`Room ${roomNumber} created`);
+
+        // Add the room to the activeRooms array
+        activeRooms.push(roomNumber);
+        console.log('activeRooms updated', activeRooms);
+
+        // Emit the roomCreated event only to the socket that triggered the createRoom event
+        socket.emit("roomCreated", roomNumber, username);
+    });
+```
+</details>
+<details>
+  <summary>Socket event: roomCreated</summary>
+  Serverside:
+
 ```javascript
     socket.on("createRoom", (room, username) => {
         const roomNumber = room;
@@ -155,14 +176,15 @@ Yes, je bent nu helemaal klaar! Ga naar `http://localhost:4200/` en have fun met
     });
 ```
 
+Client side:
 
-    
+```javascript
+socket.on("roomCreated", (roomNumber, username) => {
+    console.log(`Room ${roomNumber} created by ${username}`);
+    window.location.href = `/room/${roomNumber}?username=${username}`;
+});
+```
 
-    
-</details>
-<details>
-  <summary>Socket event: roomCreated</summary>
-  blabla
 </details>
 <details>
   <summary>Socket event: joinRoom</summary>
