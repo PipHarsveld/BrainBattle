@@ -32,7 +32,7 @@ app.engine('hbs', handlebars.engine({
     partialsDir: __dirname + '/views/partials'
 }));
 
-app.get('/', (req, res) => {
+app.get('/', (res) => {
     res.render('main', { layout: 'index' });
 })
 
@@ -52,7 +52,7 @@ app.get("/room/:roomNumber", (req, res) => {
     res.render("room", { layout: "index", roomNumber, username: username });
 });
 
-app.get('/error', (req, res) => {
+app.get('/error', (res) => {
     res.render('error', { layout: 'index' });
 })
 
@@ -128,7 +128,7 @@ io.on('connection', (socket) => {
         socket.emit("roomCreated", roomNumber, username);
     });
 
-    socket.on("joinRoom", ({ username, roomNumber, res }) => {
+    socket.on("joinRoom", ({ username, roomNumber}) => {
         // Check if the room is active
         const socketRooms = socket.rooms;
         console.log('joinRoom', socketRooms);
