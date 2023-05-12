@@ -32,7 +32,7 @@ app.engine('hbs', handlebars.engine({
     partialsDir: __dirname + '/views/partials'
 }));
 
-app.get('/', (res) => {
+app.get('/', (req, res) => {
     res.render('main', { layout: 'index' });
 })
 
@@ -52,7 +52,7 @@ app.get("/room/:roomNumber", (req, res) => {
     res.render("room", { layout: "index", roomNumber, username: username });
 });
 
-app.get('/error', (res) => {
+app.get('/error', (req, res) => {
     res.render('error', { layout: 'index' });
 })
 
@@ -90,6 +90,8 @@ app.get("/quiz", async (req, res) => {
         const firstQuestionCorrectAnswer = data[0].correctAnswer;
         console.log('Correct answer:', firstQuestionCorrectAnswer);
 
+        
+
         io.on('connection', (socket) => {
             socket.emit('sendCorrectAnswer', firstQuestionCorrectAnswer);
 
@@ -97,8 +99,10 @@ app.get("/quiz", async (req, res) => {
                 // check if answer is correct
                 if (clickedAnswer === firstQuestionCorrectAnswer) {
                     console.log('Correct answer');
+                    socket.emit('correctAnswer');
                 } else {
                     console.log('Wrong answer');
+                    socket.emit('wrongAnswer');
                 }
             });
         });
@@ -128,7 +132,7 @@ io.on('connection', (socket) => {
         socket.emit("roomCreated", roomNumber, username);
     });
 
-    socket.on("joinRoom", ({ username, roomNumber}) => {
+    socket.on("joinRoom", ({ username, roomNumber, res }) => {
         // Check if the room is active
         const socketRooms = socket.rooms;
         console.log('joinRoom', socketRooms);
@@ -147,6 +151,7 @@ io.on('connection', (socket) => {
         console.log('rejoinRoom');
         socket.join(roomNumber);
         console.log(socket.rooms);
+
     });
 
     socket.on('chat', (data) => {

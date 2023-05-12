@@ -2,13 +2,13 @@
     {{> header}}
 </header>
 <main class="quiz">
-    <p>Here's your first question:</p>
     <p>{{ question }}</p>
     <section>
         {{#each answers}}
             <button value="{{ this }}">{{ this }}</button>
         {{/each}}
     </section>
+    <p id="feedback"></p>
 
-    <a href="/quiz" class="button">New question</a>
+    <a href="/quiz" class="button">Next question</a>
 </main>

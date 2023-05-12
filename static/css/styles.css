@@ -128,7 +128,6 @@ fieldset>button:hover {
 }
 
 
-
 .room>section>form>fieldset{
     display: flex;
 }
@@ -136,8 +135,6 @@ fieldset>button:hover {
 .room>section>form>fieldset>input{
     width: 100%;
 }
-
-
 
 .quiz>section>button{
     text-align: center;
@@ -147,6 +144,14 @@ fieldset>button:hover {
     border-radius: 1rem;
 }
 
+
+.quiz>section>button:hover {
+    background-color: #5b4ad8;
+}
+
+.quiz>a{
+    display: none;
+}
 
 
 /***************/

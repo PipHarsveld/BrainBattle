@@ -119,6 +119,20 @@ socket.on("sendCorrectAnswer", (firstQuestionCorrectAnswer) => {
         }
     });
 });
+ 
+socket.on('correctAnswer', () => {
+    const feedbackElement = document.querySelector('#feedback');
+    feedbackElement.innerHTML = "You're right! That is the correct answer.";
+
+    const nextQuestionButton = document.querySelector('.quiz>a');
+    nextQuestionButton.style.display = "block";
+});
+
+socket.on('wrongAnswer', () => {
+    const feedbackElement = document.querySelector('#feedback');
+    feedbackElement.innerHTML = "That's the wrong answer. Try again!";
+    console.log('testjeeee wrong answer');
+});
 
 socket.on("roomNotFound", ({ roomNumber }) => {
     // Render the error page
