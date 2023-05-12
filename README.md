@@ -6,7 +6,8 @@ Voor het individuele deel ga ik een Trivia app maken, waarbij je met meerdere me
 
 BrainBattle is te spelen via [deze link](https://brainbattle.up.railway.app/)
 
-<!-- Add a nice image here at the end of the week, showing off your shiny frontend 📸 -->
+
+<image src="https://github.com/PipHarsveld/BrainBattle/assets/54938035/4b56e488-0fab-42c8-912e-55bd1fea3c5b" height=500px>
 
 ## Table of Contents
 * [Concept](#concept)
