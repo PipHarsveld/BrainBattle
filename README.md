@@ -19,7 +19,6 @@ BrainBattle is te spelen via [deze link](https://brainbattle.up.railway.app/)
 * [Rooms met socket.io](#rooms-met-socketio)
 * [Coding style](#coding-style)
 * [Wishlist](#wishlist)
-* [Reflectie](#reflectie)
 * [Maker](#maker)
 * [License](#license)
 
@@ -51,7 +50,7 @@ Begin klein, babysteps, en bereid het daarna uit. Er staat een goede tutorial ov
 - [X] Join een room door middel van een roomnummer
 - [X] Verstuur berichten binnen een room
 - [X] Ontvang berichten van andere gebruikers in dezelfde room
-- [ ] Zie wanneer een een andere gebruiker aan het typen is
+- [X] Zie wanneer een een andere gebruiker aan het typen is
 
 
 ## API
@@ -495,11 +494,6 @@ Helaas waren mijn plannen groter en uitdagender dan ik van te voren had bedacht,
 - [ ] Na afloop van het spel een ranglijst op basis van de behaalde score
 - [ ] Na afloop van het spel een chatfunctie om het spel te bespreken
 - [ ] Mogelijkheid om een nieuw potje te starten
-
-
-## Reflectie
-Ik ben erg trots op het eindresultaat, maar ben ook zeker kritisch op mijn eigen werk. 
-
 
 ## Maker
 Deze Chatroom app is gemaakt door:
