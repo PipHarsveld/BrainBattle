@@ -126,9 +126,10 @@ Yes, je bent nu helemaal klaar! Ga naar `http://localhost:4200/` en have fun met
 
 ## Realtime events
 <details>
-  <summary>Socket event: createRoom</summary>
-    Wanneer de gebruiker op de 'create room' knop klikt, wordt er een nieuwe room aangemaakt. Er wordt een random roomnumber gegenereed en samen met de gebruikersnaam wordt dit naar de client gestuurd. Aan de clientside wordt de gebruiker dan toegevoegd aan de room met het gegenereerde roomnumber.
-    Server side:
+<summary>Socket event: createRoom</summary>
+Wanneer de gebruiker op de 'create room' knop klikt, wordt er een nieuwe room aangemaakt. Er wordt een random roomnumber gegenereed en samen met de gebruikersnaam wordt dit naar de client gestuurd. Aan de clientside wordt de gebruiker dan toegevoegd aan de room met het gegenereerde roomnumber.
+
+Serverside:
 
 ```javascript
     if (button === "create-room-btn") {
@@ -138,7 +139,7 @@ Yes, je bent nu helemaal klaar! Ga naar `http://localhost:4200/` en have fun met
     }
 ```
 
-Client side:
+Clientside:
 
 ```javascript
     socket.on("createRoom", (room, username) => {
@@ -157,8 +158,10 @@ Client side:
 ```
 </details>
 <details>
-  <summary>Socket event: roomCreated</summary>
-  Serverside:
+<summary>Socket event: roomCreated</summary>
+In de ```socket.on("createRoom")``` functie wordt de room aangemaakt en wordt de gebruiker toegevoegd aan de room. Vervolgens wordt de ```roomCreated``` event geëmit naar de client. De client wordt dan geredirect naar een /room pagina met een speciek roomnumber.
+
+Serverside:
 
 ```javascript
     socket.on("createRoom", (room, username) => {
@@ -176,7 +179,7 @@ Client side:
     });
 ```
 
-Client side:
+Clientside:
 
 ```javascript
 socket.on("roomCreated", (roomNumber, username) => {
@@ -187,8 +190,52 @@ socket.on("roomCreated", (roomNumber, username) => {
 
 </details>
 <details>
-  <summary>Socket event: joinRoom</summary>
-  blabla
+<summary>Socket event: joinRoom</summary>
+Zodra de gebruiker op de /room pagina is beland, worden meteen de parameters gebruikersnaam en roomnumber uit de URL opgehaald. Vervolgs wordt het ```joinRoom``` event geëmit naar de server. De server checkt of de room actief is en voegt de gebruiker toe aan de room of laat een error pagina zien. 
+
+Serverside:
+
+```javascript
+socket.on("joinRoom", ({ username, roomNumber}) => {
+        // Check if the room is active
+        const socketRooms = socket.rooms;
+        console.log('joinRoom', socketRooms);
+        if (activeRooms.includes(roomNumber)) {
+            console.log(`${username} joined room ${roomNumber}`);
+            socket.join(`${roomNumber}`);
+            socket.emit("roomJoined", { roomNumber, username });
+        } else {
+            console.log(`Room ${roomNumber} does not exist`);
+            // Render the error page
+            socket.emit("roomNotFound", { roomNumber, username });
+        }
+    });
+```
+
+Clientside:
+
+```javascript
+if (url.includes("room")) {
+    console.log("chat page");
+
+    let messages = document.querySelector('section ul');
+    let inputText = document.querySelector('input#message');
+    let send = document.querySelector('button#send');
+    let typingState = document.querySelector('.room>section>p');
+
+    // Read the username from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const username = urlParams.get('username');
+    const roomNumber = url.split('/').pop().split('?')[0];
+    console.log(roomNumber);
+
+    socket.emit("rejoinRoom", roomNumber, username);
+
+    // Overige code
+}
+```
+
+
 </details>
 <details>
   <summary>Socket event: roomJoined</summary>
