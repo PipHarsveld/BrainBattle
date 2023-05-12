@@ -12,7 +12,6 @@ BrainBattle is te spelen via [deze link](https://brainbattle.up.railway.app/)
 * [Concept](#concept)
 * [Features](#features)
 * [API](#api)
-* [Schetsen](#schetsen)
 * [Coding style](#coding-style)
 * [Installeren](#installeren)
 * [Maker](#maker)
@@ -88,12 +87,6 @@ https://the-trivia-api.com/v1/questions?category=science&difficulty=medium
 <img src="https://github.com/PipHarsveld/BrainBattle/assets/54938035/6bb3dfd9-67c8-4d35-b5d4-76201844cdd0" height=500px>
 
 
-## Schetsen
-
-
-### Uiteindelijke ontwerp
-
-
 ## Installeren
 Om aan deze app te werken, moet je deze repository clonen. Je kunt dit doen door het volgende commando in je terminal te typen:
 
@@ -126,6 +119,11 @@ Yes, je bent nu helemaal klaar! Ga naar `http://localhost:4200/` en have fun met
 <image src="https://github.com/PipHarsveld/BrainBattle/assets/54938035/bfdd4dea-4fb0-4fa8-b343-c68a18a4519d" height=400px>
 
 
+## Realtime events
+<details>
+  <summary>Socket event: joe</summary>
+  blabla
+</details>
 
 ## Coding style
 Om ervoor te zorgen dat mijn code overzichtelijk en netjes is, hebben ik een aantal regels opgesteld. Deze regels zijn:
