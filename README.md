@@ -84,6 +84,9 @@ API request om trivia vragen op te halen in de categorie science en met de moeil
 https://the-trivia-api.com/v1/questions?category=science&difficulty=medium
 ```
 
+### UML data model
+<img src="https://github.com/PipHarsveld/BrainBattle/assets/54938035/6bb3dfd9-67c8-4d35-b5d4-76201844cdd0" height=500px>
+
 
 ## Schetsen
 
