@@ -215,24 +215,18 @@ socket.on("joinRoom", ({ username, roomNumber}) => {
 Clientside:
 
 ```javascript
-if (url.includes("room")) {
-    console.log("chat page");
+else if (button === "join-room-btn") {
+        console.log('join-room-btn');
 
-    let messages = document.querySelector('section ul');
-    let inputText = document.querySelector('input#message');
-    let send = document.querySelector('button#send');
-    let typingState = document.querySelector('.room>section>p');
+        const roomNumberInput = document.querySelector("#room-number");
+        console.log(username + ' : ' + roomNumberInput);
 
-    // Read the username from the URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const username = urlParams.get('username');
-    const roomNumber = url.split('/').pop().split('?')[0];
-    console.log(roomNumber);
+        const roomNumber = roomNumberInput.value;
+        console.log('roomnumber' + roomNumber);
 
-    socket.emit("rejoinRoom", roomNumber, username);
-
-    // Overige code
-}
+        // Emit the joinRoom event to the server with the username and room number
+        socket.emit("joinRoom", { roomNumber: roomNumber, username: username, res: null });
+    }
 ```
 </details>
 <details>
@@ -306,19 +300,122 @@ socket.on("roomNotFound", ({ roomNumber }) => {
 </details>
 <details>
   <summary>Socket event: rejoinRoom</summary>
-  blabla
+Zodra de gebruiker wordt doorgestuurd naar de /room pagina, wordt de gebruiker uit de room gegooid. Om dit probleem op te lossen, wordt het ```rejoinRoom``` event geëmit naar de server. De server voegt de gebruiker weer toe aan de room.
+
+Serverside:
+
+```javascript
+    socket.on("rejoinRoom", (roomNumber) => {
+        console.log('rejoinRoom');
+        socket.join(roomNumber);
+        console.log(socket.rooms);
+    });
+```
+
+Clientside:
+
+```javascript
+if (url.includes("room")) {
+    console.log("chat page");
+
+    let messages = document.querySelector('section ul');
+    let inputText = document.querySelector('input#message');
+    let send = document.querySelector('button#send');
+    let typingState = document.querySelector('.room>section>p');
+
+    // Read the username from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const username = urlParams.get('username');
+    const roomNumber = url.split('/').pop().split('?')[0];
+    console.log(roomNumber);
+
+    socket.emit("rejoinRoom", roomNumber, username);
+
+    // Overige code
+}
+```
+
 </details>
 <details>
   <summary>Socket event: chat</summary>
-  blabla
+Wanneer de gebruiker een bericht verstuurd, wordt het ```chat``` event geëmit naar de server. De server stuurt het bericht vervolgens door naar alle die zich in dezelfde room bevinden.
+
+Serverside:
+
+```javascript
+socket.on('chat', (data) => {
+        console.log(data);
+        console.log(data.roomNumber)
+        console.log(socket.rooms)
+        io.to(data.roomNumber).emit("chat", data);
+    });
+```
+
+
+Clientside:
+
+```javascript
+// send text
+document.querySelector('form').addEventListener('submit', event => {
+    event.preventDefault()
+    let data = { name: username, message: inputText.value, roomNumber: roomNumber }
+    socket.emit('chat', data);
+
+    inputText.value = '';
+});
+```
 </details>
 <details>
   <summary>Socket event: typing</summary>
-  blabla
+Wanneer de gebruiker aan het typen is, wordt het ```typing``` event geëmit naar de server. De server stuurt vervolgens een bericht naar alle gebruikers in dezelfde room, dat de gebruiker aan het typen is.
+
+Clientside:
+
+```javascript
+    inputText.addEventListener('keypress', (username) => {
+        socket.emit('typing', username)
+    });
+```	
 </details>
 <details>
   <summary>Socket event: sendCorrectAnswer</summary>
-  blabla
+Wanneer de gebruiker een antwoord heeft gegeven op de eerste vraag, wordt het ```sendCorrectAnswer``` event geëmit naar de server. De server stuurt vervolgens het correcte antwoord terug naar de client, zoda er clientside gechecked kan worden of het gegeven antwoord correct is.
+
+Serverside:
+
+```javascript
+ io.on('connection', (socket) => {
+            socket.emit('sendCorrectAnswer', firstQuestionCorrectAnswer);
+
+            socket.on('sendAnswers', (clickedAnswer, firstQuestionCorrectAnswer) => {
+                // check if answer is correct
+                if (clickedAnswer === firstQuestionCorrectAnswer) {
+                    console.log('Correct answer');
+                } else {
+                    console.log('Wrong answer');
+                }
+            });
+        });
+```
+
+Clientside:
+
+```javascript
+socket.on("sendCorrectAnswer", (firstQuestionCorrectAnswer) => {
+    const buttonsContainer = document.querySelector(".quiz>section");
+
+    buttonsContainer.addEventListener('click', (event) => {
+        // Check if the clicked element is a button
+        if (event.target.tagName === 'BUTTON') {
+            // Handle the button click event here
+            console.log('Button clicked:', event.target.textContent);
+            const clickedAnswer = event.target.textContent;
+            socket.emit("sendAnswers", clickedAnswer, firstQuestionCorrectAnswer);
+        }
+    });
+})
+```
+
 </details>
 
 
