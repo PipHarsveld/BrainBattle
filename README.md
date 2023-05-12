@@ -191,7 +191,7 @@ socket.on("roomCreated", (roomNumber, username) => {
 </details>
 <details>
 <summary>Socket event: joinRoom</summary>
-Zodra de gebruiker op de /room pagina is beland, worden meteen de parameters gebruikersnaam en roomnumber uit de URL opgehaald. Vervolgs wordt het ```joinRoom``` event geëmit naar de server. De server checkt of de room actief is en voegt de gebruiker toe aan de room of laat een error pagina zien. 
+Zodra de gebruiker een bestaande room wil joinen, wordt hij doorgestuurd naar de /room pagina en wordt in de URL de username en roomnumber meegegeven. Vervolgens worden die gegevens op de clientside weer uit de URL opgehaald. Vervolgs wordt het ```joinRoom``` event geëmit naar de server. De server checkt of de room actief is en voegt de gebruiker toe aan de room of laat een error pagina zien. 
 
 Serverside:
 
@@ -234,16 +234,75 @@ if (url.includes("room")) {
     // Overige code
 }
 ```
-
-
 </details>
 <details>
   <summary>Socket event: roomJoined</summary>
-  blabla
+Wanneer het ```joinRoom``` event succesvol is, wordt het ```roomJoined``` event geëmit naar de client. De client wordt dan geredirect naar een /room pagina met een speciek roomnumber.
+  
+Serverside:
+    
+```javascript
+socket.on("joinRoom", ({ username, roomNumber}) => {
+        // Check if the room is active
+        const socketRooms = socket.rooms;
+        console.log('joinRoom', socketRooms);
+        if (activeRooms.includes(roomNumber)) {
+            console.log(`${username} joined room ${roomNumber}`);
+            socket.join(`${roomNumber}`);
+            socket.emit("roomJoined", { roomNumber, username });
+        } else {
+            console.log(`Room ${roomNumber} does not exist`);
+            // Render the error page
+            socket.emit("roomNotFound", { roomNumber, username });
+        }
+    });
+```
+
+
+Clientside:
+
+```javascript
+// Listen for the roomJoined event from the server
+socket.on("roomJoined", ({ roomNumber, username }) => {
+    console.log(`${username} joined room ${roomNumber}`);
+    window.location.href = `/room/${roomNumber}?username=${username}`;
+});
+```
+
 </details>
 <details>
   <summary>Socket event: roomNotFound</summary>
-  blabla
+In het event ```joinRoom``` wordt gecheckt of het roomnummer wat de gebruiker heeft ingevuld op dit moment een actieve room is. Als dat niet het geval is, wordt het ```roomNotFound``` event geëmit naar de client. De client wordt dan geredirect naar de /error pagina, die de gebruiker erop wijst dat hij mogelijk een verkeerd roomnummer heeft ingevuld.
+
+Serverside:
+
+```javascript
+socket.on("joinRoom", ({ username, roomNumber}) => {
+        // Check if the room is active
+        const socketRooms = socket.rooms;
+        console.log('joinRoom', socketRooms);
+        if (activeRooms.includes(roomNumber)) {
+            console.log(`${username} joined room ${roomNumber}`);
+            socket.join(`${roomNumber}`);
+            socket.emit("roomJoined", { roomNumber, username });
+        } else {
+            console.log(`Room ${roomNumber} does not exist`);
+            // Render the error page
+            socket.emit("roomNotFound", { roomNumber, username });
+        }
+    });
+```
+
+Clientside:
+
+```javascript
+socket.on("roomNotFound", ({ roomNumber }) => {
+    // Render the error page
+    console.log(`Room ${roomNumber} does not exist`);
+    window.location.href = `/error`;
+});
+```
+
 </details>
 <details>
   <summary>Socket event: rejoinRoom</summary>
