@@ -143,23 +143,17 @@ io.on('connection', (socket) => {
         }
     });
 
-    socket.on("rejoinRoom", (roomNumber, username) => {
+    socket.on("rejoinRoom", (roomNumber) => {
         console.log('rejoinRoom');
         socket.join(roomNumber);
         console.log(socket.rooms);
-        // console.log(`Room ${roomNumber} created`);
-
-        // // Add the room to the activeRooms array
-        // activeRooms.push(roomNumber);
-        // console.log('activeRooms updated', activeRooms);
     });
 
     socket.on('chat', (data) => {
         console.log(data);
         console.log(data.roomNumber)
         console.log(socket.rooms)
-        io.to(data.roomNumber).emit("chat", data); // WERKT NIET???
-        //io.sockets.emit("chat", data);
+        io.to(data.roomNumber).emit("chat", data);
     });
 
     socket.on('disconnect', () => {
