@@ -26,25 +26,25 @@ if (url.includes("room")) {
         socket.emit('chat', data);
 
         inputText.value = '';
-    })
+    });
 
     inputText.addEventListener('keypress', (username) => {
         socket.emit('typing', username)
-    })
+    });
 
     socket.on('chat', (data) => {
         console.log(data);
         messages.appendChild(Object.assign(document.createElement('li'), { textContent: data.name + ': ' + data.message }));
         typingState.innerHTML = "";
         messages.scrollTop = messages.scrollHeight;
-    })
+    });
 
     socket.on('typing', (username) => {
         typingState.innerHTML = (username + " is aan het typen...")
         setTimeout(() => {
             typingState.innerHTML = "";
         }, 3000);
-    })
+    });
 
 } else if (url.includes("quiz")) {
         console.log("quiz page");
@@ -118,7 +118,7 @@ socket.on("sendCorrectAnswer", (firstQuestionCorrectAnswer) => {
             socket.emit("sendAnswers", clickedAnswer, firstQuestionCorrectAnswer);
         }
     });
-})  
+});
 
 socket.on("roomNotFound", ({ roomNumber }) => {
     // Render the error page
