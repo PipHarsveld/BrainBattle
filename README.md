@@ -4,7 +4,7 @@ Voor het vak Realtime Web hebben we met een groepje een basic Chatroom app gemaa
 
 Voor het individuele deel ga ik een Trivia app maken, waarbij je met meerdere mensen tegelijkertijd een quiz kunt doen. Ik ben nog niet echt begonnen aan deze trivia app, dus de live link gaat naar de SpeakEasy app.
 
-BrainBatlle is te spelen via [deze link]()
+BrainBattle is te spelen via [deze link](brainbattle.up.railway.app/)
 
 <!-- Add a nice image here at the end of the week, showing off your shiny frontend 📸 -->
 
