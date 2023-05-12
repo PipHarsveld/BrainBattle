@@ -130,17 +130,17 @@ Yes, je bent nu helemaal klaar! Ga naar `http://localhost:4200/` en have fun met
     <!-- Wanneer de gebruiker op de 'create room' knop klikt, wordt er een nieuwe room aangemaakt. Er wordt een random roomnumber gegenereed 
     De gebruiker wordt vervolgens naar de room gestuurd en de room wordt toegevoegd aan de activeRooms array. De room wordt alleen toegevoegd aan de activeRooms array als de room nog niet bestaat. Als de room al bestaat, wordt de gebruiker naar de room gestuurd en wordt de room niet toegevoegd aan de activeRooms array. -->
 
-      Server side:
-    ```javascript
+    Server side:
+```javascript
     if (button === "create-room-btn") {
         console.log('create-room-btn');
         // Emit the createRoom event to the server with the username
         socket.emit("createRoom", roomNumber, username);
     }
-    ```
+```
   
     Client side:
-    ```javascript
+```javascript
     socket.on("createRoom", (room, username) => {
         const roomNumber = room;
         socket.join(roomNumber);
@@ -154,7 +154,7 @@ Yes, je bent nu helemaal klaar! Ga naar `http://localhost:4200/` en have fun met
         // Emit the roomCreated event only to the socket that triggered the createRoom event
         socket.emit("roomCreated", roomNumber, username);
     });
-    ```
+```
 
 
     
