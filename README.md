@@ -24,16 +24,15 @@ Ik wil een app maken waarbij vrienden tegen elkaar een spelletje trivia kunnen s
 
 ### Opties voor uitbereiden
 Ik wil beginnen met een zo simpel mogelijke app die alleen de basis functionaliteiten heeft, aangezien ik dit al een hele uitdaging vind. Als ik meer tijd heb, heb ik wel al een aantal ideeën voor uitbreidingen:
-- [ ] Meerdere rooms die betreden kunnen worden door het invullen van een roomcode
+- [X] Meerdere rooms die betreden kunnen worden door het invullen van een roomcode
 - [ ] Naast het kiezen van een nickname, ook een profielfoto kunnen uploaden of kiezen uit een aantal aangeboden characters. Elk persoon zou ook een random character kunnen krijgen.
 - [ ] Optie voor de gebruiker om een nieuwe room te maken met instellingen voor het aantal vragen, de categorie van de vragen en moeilijkheid van de vragen
 - [ ] Verschillende punten toekennen op basis van de snelheid van het antwoord (eerste persoon krijgt 5 punten, tweede persoon krijgt 4 punten etc.)
 
 ### Benodigde schermen
-- [ ] Welkomsscherm waar je een nickname kan kiezen
-- [ ] Scherm met een overzicht van alle aanwezige gebruikers en een optie om te chatten
-- [ ] Scherm met een quizvraag en 4 antwoordopties
-- [ ] Scherm met het goede antwoord
+- [X] Welkomsscherm waar je een nickname kan kiezen en een room kan aanmaken of een room kan joinen
+- [X] Scherm van een specifieke room met een optie om te chatten
+- [X] Scherm met een quizvraag en 4 antwoordopties
 - [ ] Scherm met een scorebord en een optie om een nieuwe quiz te starten
 
 ### Feedback op concept van Justus
@@ -168,12 +167,12 @@ socket.on("roomJoined", ({ roomNumber, username }) => {
 ## Wishlist
 Helaas waren mijn plannen groter en uitdagender dan ik van te voren had bedacht, waardoor ik niet de tijd heb gehad om alles op mijn wishlist uit te werken. Mocht ik in de toekomst nog gaan verderwerken aan dit project, dan zijn dit de dingen die ik nog graag zou willen toevoegen:
 
-- [] Bij het aanmaken van een nieuwe room kan de gebruiker de onderwerpen en moeilijkheid van de vragen kiezen
-- [] Meerdere rondes met triviavragen
-- [] Het opslaan van de score van elke speler
-- [] Na afloop van het spel een ranglijst op basis van de behaalde score
-- [] Na afloop van het spel een chatfunctie om het spel te bespreken
-- [] Mogelijkheid om een nieuw potje te starten
+- [ ] Bij het aanmaken van een nieuwe room kan de gebruiker de onderwerpen en moeilijkheid van de vragen kiezen
+- [ ] Meerdere rondes met triviavragen
+- [ ] Het opslaan van de score van elke speler
+- [ ] Na afloop van het spel een ranglijst op basis van de behaalde score
+- [ ] Na afloop van het spel een chatfunctie om het spel te bespreken
+- [ ] Mogelijkheid om een nieuw potje te starten
 
 
 ## Reflectie
